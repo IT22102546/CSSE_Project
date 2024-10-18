@@ -1,16 +1,22 @@
-import { Avatar, Dropdown, DropdownDivider, DropdownHeader, DropdownItem, Navbar } from "flowbite-react";
+import {
+  Avatar,
+  Dropdown,
+  DropdownDivider,
+  DropdownHeader,
+  DropdownItem,
+  Navbar,
+} from "flowbite-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { HiShoppingBag, HiUser } from 'react-icons/hi';
+import { HiShoppingBag, HiUser, HiMenu, HiX } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { signOut } from "../redux/user/userSlice";
-
-
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
- 
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSignOut = async () => {
     try {
@@ -21,87 +27,115 @@ export default function Header() {
       console.log(error);
     }
   };
-  return (
-    <Navbar className="border-b-2 relative z-50 bg-slate-500">
-      <div className="container mx-auto flex flex-wrap items-center justify-between py-4">
-   
-        <div className="flex items-center">
-          <NavLink to="/" className="self-center whitespace-nowrap text-3xl font-semibold font-tangerine ml-0 md:ml-16">
-            Logo
-          </NavLink>
-        </div>
-        
-    
-        <div className="flex space-x-8">
-          <NavLink 
-            to="/" 
-            className={({ isActive }) => 
-              isActive ? "text-black" : "text-white"
-            }
-          >
-            Home
-          </NavLink>
-          <NavLink 
-            to="/category" 
-            className={({ isActive }) => 
-              isActive ? "text-black" : "text-white"
-            }
-          >
-            Categories
-          </NavLink>
-         
-          <NavLink 
-            to="/product-page" 
-            className={({ isActive }) => 
-              isActive ? "text-black" : "text-white"
-            }
-          >
-            Products
-          </NavLink>
-          
-          <NavLink 
-            to="/blogs" 
-            className={({ isActive }) => 
-              isActive ?"text-black" : "text-white"
-            }
-          >
-            Blogs
-          </NavLink>
-        </div>
-        
-        <div className="flex space-x-8 items-center">
 
-        {currentUser && (
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <Navbar className="border-b-2 relative z-50 bg-gradient-to-r from-green-700 to-green-900 text-white p-4 rounded-b-lg shadow-lg">
+      <div className="container mx-auto flex flex-wrap items-center justify-between py-4">
+        <div className="flex items-center">
+          <NavLink to="/" className="ml-0 md:ml-16">
+            <img
+              src="/path/to/your/logo.png"
+              alt="Logo"
+              className="h-10 w-auto md:h-14"
+            />
+          </NavLink>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden flex items-center text-white"
+          onClick={toggleMenu}
+        >
+          {isOpen ? (
+            <HiX className="w-6 h-6" />
+          ) : (
+            <HiMenu className="w-6 h-6" />
+          )}
+        </button>
+
+        <div
+          className={`w-full md:flex md:w-auto ${isOpen ? "block" : "hidden"}`}
+        >
+          {/* Links */}
+          <div className="flex flex-col md:flex-row md:space-x-8 mt-4 md:mt-0">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "text-black" : "text-white"
+              }
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to="/category"
+              className={({ isActive }) =>
+                isActive ? "text-black" : "text-white"
+              }
+            >
+              Categories
+            </NavLink>
+            <NavLink
+              to="/product-page"
+              className={({ isActive }) =>
+                isActive ? "text-black" : "text-white"
+              }
+            >
+              Products
+            </NavLink>
+            <NavLink
+              to="/blogs"
+              className={({ isActive }) =>
+                isActive ? "text-black" : "text-white"
+              }
+            >
+              Blogs
+            </NavLink>
+          </div>
+        </div>
+
+        <div className="hidden md:flex space-x-8 items-center">
+          {currentUser && (
             <Link to="/cart">
               <div className="flex relative">
-              <HiShoppingBag className="mr-1" style={{ fontSize: '24px' }} />
-                 
+                <HiShoppingBag className="mr-1" style={{ fontSize: "24px" }} />
               </div>
             </Link>
           )}
-          
-        {currentUser ? (
-                    <Dropdown arrowIcon={false} inline label={
-                        <Avatar alt="user" img={currentUser.profilePicture} rounded className="h-10 w-10" />
-                    }>
-                        <DropdownHeader>
-                            <span className="block text-sm">{currentUser.username}</span>
-                            <span className="block text-sm font-medium truncate">{currentUser.email}</span>
-                        </DropdownHeader>
-                        <Link to={'/dashboard?tab=profile'}>
-                            <DropdownItem>Profile</DropdownItem>
-                        </Link>
-                        <DropdownDivider/>
-                        <DropdownItem onClick={handleSignOut}>Sign Out</DropdownItem>
-                    </Dropdown>
-                ) : (
-                  <Link to="/sign-in">
-                 
-                    <HiUser className="text-white"/>
-             
-                  </Link>
-                )}
-          
+
+          {currentUser ? (
+            <Dropdown
+              arrowIcon={false}
+              inline
+              label={
+                <Avatar
+                  alt="user"
+                  img={currentUser.profilePicture}
+                  rounded
+                  className="h-10 w-10"
+                />
+              }
+            >
+              <DropdownHeader>
+                <span className="block text-sm">{currentUser.username}</span>
+                <span className="block text-sm font-medium truncate">
+                  {currentUser.email}
+                </span>
+              </DropdownHeader>
+              <Link to={"/dashboard?tab=profile"}>
+                <DropdownItem>Profile</DropdownItem>
+              </Link>
+              <DropdownDivider />
+              <DropdownItem onClick={handleSignOut}>Sign Out</DropdownItem>
+            </Dropdown>
+          ) : (
+            <Link to="/sign-in">
+              <HiUser className="text-white" />
+            </Link>
+          )}
         </div>
       </div>
     </Navbar>

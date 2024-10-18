@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react'
+import WasteForm from '../Components/WasteForm'
+import WasteCollectorInterface from '../Components/DriverMap'
+
 import mapboxgl from 'mapbox-gl';
 
-mapboxgl.accessToken = 'pk.eyJ1IjoiYWR3eDIwMDEiLCJhIjoiY20yZTdvMG04MDJodjJrcHZ6YXdwYnFqcyJ9.7xBkMPBN3cuuiFQSeJOnbA';
+
 
 export default function Home() {
   const [longitude, setLongitude] = useState(null);
@@ -61,7 +64,7 @@ export default function Home() {
           <div id="map" className="w-full h-96 mt-4 bg-gray-200 relative"></div>
         </div>
       ) : (
-        <p>Fetching location...</p>
+        <p>Fetching location..</p>
       )}
     </div>
   );
