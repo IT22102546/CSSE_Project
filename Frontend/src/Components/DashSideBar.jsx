@@ -65,6 +65,23 @@ export default function DashSideBar() {
              
             </>
           )}
+          {currentUser?.isCollector && (
+            <>
+              <Link to='/dashboard?tab=assignedRoutes' key="assignedRoutes">
+                <Sidebar.Item
+                  active={tab === 'assignedRoutes'}
+                  icon={HiOutlineUserGroup}
+                  as='div'
+                >
+                  Users
+                </Sidebar.Item>
+              </Link>
+
+
+             
+            </>
+          )}
+
 
               
              
