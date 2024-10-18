@@ -3,6 +3,15 @@ import { useLocation } from "react-router-dom";
 import DashSideBar from "../Components/DashSideBar";
 import DashProfile from "../Components/DashProfile";
 import DashUsers from "../Components/DashUsers";
+import DashAssignedRoutes from "../Components/DashAssignedRoutes";
+import DashResource from "../Components/DashResource";
+import DashRoutes from "../Components/DashRoutes";
+import DashIssueCollector from "../Components/DashIssueCollector";
+import AddTruckForm from "./AddTruckForm";
+import DashTrucks from "../Components/DashTrucks";
+
+import DashRequest from "../Components/DashRequest";
+
 
 
 
@@ -28,6 +37,15 @@ export default function DashBoard() {
       </div>
       {tab==='profile' && <DashProfile/>}
       {tab === 'users' && <DashUsers/>}
+      {tab === 'assignedRoutes' && <DashAssignedRoutes/>}
+      {tab === 'resource' && <DashResource/>}
+      {tab === 'route' && <DashRoutes/>}
+      {tab === 'reportIssue' && <DashIssueCollector/>}
+      {tab === 'addtruck' && <AddTruckForm/>}
+      {tab === 'trucks' && <DashTrucks/> }
+
+      {tab === 'request' && <DashRequest/>}
+
       
    
      
