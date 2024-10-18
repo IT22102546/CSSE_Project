@@ -5,6 +5,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import authRoute from "./routes/auth.route.js"
 import userRoute from "./routes/user.route.js"
+import binRoute from "./routes/bin.route.js"
+
 
 dotenv.config();
 
@@ -30,6 +32,7 @@ app.use(cors(corsOptions));
 
 app.use("/api/auth",authRoute);
 app.use("/api/user",userRoute); 
+app.use('/api/bin', binRoute);
 
 
 app.use((err,req,res,next)=>{
