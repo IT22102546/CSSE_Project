@@ -10,6 +10,9 @@ import DashIssueCollector from "../Components/DashIssueCollector";
 import AddTruckForm from "./AddTruckForm";
 import DashTrucks from "../Components/DashTrucks";
 
+import DashRequest from "../Components/DashRequest";
+
+
 
 
 
@@ -40,6 +43,9 @@ export default function DashBoard() {
       {tab === 'reportIssue' && <DashIssueCollector/>}
       {tab === 'addtruck' && <AddTruckForm/>}
       {tab === 'trucks' && <DashTrucks/> }
+
+      {tab === 'request' && <DashRequest/>}
+
       
    
      
