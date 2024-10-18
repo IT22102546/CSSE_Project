@@ -1,5 +1,6 @@
 // controllers/binController.js
 import Bin from '../models/bin.model.js';
+import QRCode from 'qrcode';
 
 // Create or Update Bin Request
 export const createOrUpdateBin = async (req, res) => {
@@ -9,7 +10,6 @@ export const createOrUpdateBin = async (req, res) => {
       let bin = await Bin.findOne({ userId });
   
       if (bin) {
-     
         bin.longitude = longitude;
         bin.latitude = latitude;
         bin.address = address;
@@ -17,7 +17,6 @@ export const createOrUpdateBin = async (req, res) => {
         bin.overallPercentage = overallPercentage;
         bin.isRequested = true;
       } else {
-        
         bin = new Bin({
           userId,
           userName,
@@ -27,9 +26,13 @@ export const createOrUpdateBin = async (req, res) => {
           address,
           binLevels,
           overallPercentage,
-          isRequested: true, 
+          isRequested: true,
         });
       }
+  
+      // Generate a QR code for the user
+      const qrCodeData = await QRCode.toDataURL(`${userId}-${userName}`);
+      bin.qrCode = qrCodeData; // Assuming the Bin schema has a qrCode field
   
       await bin.save();
       res.status(200).json({ message: 'Bin request saved successfully', bin });

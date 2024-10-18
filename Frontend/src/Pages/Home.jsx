@@ -11,6 +11,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { FaTrash, FaRecycle, FaUtensils, FaClipboardList, FaLeaf } from 'react-icons/fa'; 
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import QRCode from 'react-qr-code';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWR3eDIwMDEiLCJhIjoiY20yZTdvMG04MDJodjJrcHZ6YXdwYnFqcyJ9.7xBkMPBN3cuuiFQSeJOnbA';
 
@@ -25,7 +26,7 @@ export default function Home() {
   const markerRef = useRef(null);
   const navigate = useNavigate();
   const { currentUser , loading } = useSelector(state => state.user);
-
+  const [qrCodeData, setQrCodeData] = useState('');
   const maxCapacity = 100;
 
   const getInitialBinValue = (binType) => {
@@ -80,6 +81,14 @@ export default function Home() {
       },
     });
   };
+
+  useEffect(() => {
+    // Generate QR code data string when user info is available
+    if (currentUser && longitude && latitude && address) {
+      const qrData = `User: ${currentUser.username}, Email: ${currentUser.email}, Address: ${address}`;
+      setQrCodeData(qrData);
+    }
+  }, [currentUser, longitude, latitude, address]);
 
   useEffect(() => {
     AOS.init();
@@ -166,6 +175,15 @@ export default function Home() {
     }
   }, []);
 
+   useEffect(() => {
+    if (location.state) {
+      const { qrCodeData, overallPercentage } = location.state;
+      setQrCodeData(qrCodeData);
+      setOverallPercentage(overallPercentage);
+    }
+  }, [location.state]);
+
+
 
   return (
     <div className="bg-green-50 min-h-screen flex flex-col items-center p-6">
@@ -210,6 +228,11 @@ export default function Home() {
               <FaLeaf className="text-green-600 text-3xl animate-bounce ml-2" />
             </div>
             <p className="text-lg font-semibold">Keep it Green and Keep recycling and reducing waste to improve this percentage!</p>
+
+            <div className="mt-4 text-center" data-aos="fade-up" data-aos-delay="500">
+            
+           
+          </div>
 
             {/* Conditionally show the "Collect Waste" button when the overall percentage exceeds 75% */}
             {overallPercentage > 75 && (
@@ -304,6 +327,16 @@ export default function Home() {
           </div>
         </div>
       )}
+
+{       qrCodeData && (
+            <div className="mt-4"  data-aos="fade-up" data-aos-delay="400">
+              <h3 className="text-xl font-bold text-center">Your QR Code</h3>
+              <QRCode value={qrCodeData} />
+              <p className="text-center text-gray-600 mt-2">Scan to view your info.</p>
+            </div>
+          )}
     </div>
+
+    
   );
 }
