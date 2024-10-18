@@ -8,24 +8,18 @@ import trashIcon from '../assets/images/trashbg.png';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { FaTrash, FaRecycle, FaUtensils, FaClipboardList, FaLeaf } from 'react-icons/fa'; 
-import { useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
-
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWR3eDIwMDEiLCJhIjoiY20yZTdvMG04MDJodjJrcHZ6YXdwYnFqcyJ9.7xBkMPBN3cuuiFQSeJOnbA';
 
 export default function Home() {
   // State and ref declarations
   const [longitude, setLongitude] = useState(null);
-  const navigate = useNavigate();
   const [latitude, setLatitude] = useState(null);
   const [error, setError] = useState(null);
   const [address, setAddress] = useState(null);
   const mapContainerRef = useRef(null);
   const mapInstance = useRef(null);
   const markerRef = useRef(null);
-  const { currentUser , loading } = useSelector(state => state.user);
 
   const maxCapacity = 100;
 
@@ -58,27 +52,6 @@ export default function Home() {
     const newValue = Math.max(binValue - maxCapacity * 0.05, 0);
     binSetter(newValue);
     localStorage.setItem(binType, newValue);
-  };
-  const goToForm = () => {
-    
-    const userId = currentUser._id; 
-    const userEmail = currentUser.email 
-    const userName = currentUser.username
-  
-    navigate('/request', {
-      state: {
-        userId,
-        userName,
-        userEmail,
-        foodBin,
-        plasticBin,
-        paperBin,
-        overallPercentage,
-        longitude,
-        latitude,
-        address,
-      },
-    });
   };
 
   useEffect(() => {
@@ -158,8 +131,6 @@ export default function Home() {
       <p className="text-lg text-center mb-4 text-gray-600" data-aos="fade-up" data-aos-delay="200">Your one-stop solution for responsible waste disposal and recycling.</p>
       <img src={trashIcon} alt="Trash Icon" className="w-16 h-16 mx-auto mb-4" data-aos="zoom-in" data-aos-delay="400" />
 
-      
-
       {error ? (
         <p className="text-red-500 text-center" data-aos="fade-in">{error}</p>
       ) : (
@@ -196,33 +167,32 @@ export default function Home() {
               </div>
               <FaLeaf className="text-green-600 text-3xl animate-bounce ml-2" />
             </div>
-            <p className="text-lg font-semibold">Keep it Green and Keep recycling and reducing waste to improve this percentage!!</p>
-            
-             {overallPercentage > 75 && (
-              <button
-              className="mt-4 bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-all"
-              onClick={goToForm}
-            >
-              Request To Collect Waste
-            </button>
+            <p className="text-lg font-semibold">Keep it Green and Keep recycling and reducing waste to improve this percentage!</p>
+
+            {/* Conditionally show the "Collect Waste" button when the overall percentage exceeds 75% */}
+            {overallPercentage > 75 && (
+              <button className="mt-4 bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-all">
+                Collect Waste
+              </button>
             )}
           </div>
 
+          {/* Individual bins UI */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-            {/* Individual bins UI */}
+            {/* Food Bin */}
             <div className="bg-green-100 p-4 rounded-lg shadow-md text-center" data-aos="fade-right">
               <h2 className="text-xl font-bold">Food Bin</h2>
               <FaUtensils className="text-green-600 text-4xl my-2" />
-              <p className="text-lg font-semibold">{foodBin} / {maxCapacity}</p>
-              <div className="w-32 h-32 mx-auto">
+              <p className="text-lg font-semibold">{foodBin} / {maxCapacity} kg</p>
+              <div className="w-24 h-24 mx-auto mt-4">
                 <CircularProgressbar
                   value={getPercentage(foodBin)}
                   text={`${getPercentage(foodBin)}%`}
                   styles={buildStyles({
-                    textSize: '18px',
-                    pathColor: getPercentage(foodBin) <= 50 ? 'green' : getPercentage(foodBin) <= 75 ? 'blue' : 'red',
-                    textColor: '#000',
-                    trailColor: '#d6d6d6',
+                    textSize: '16px',
+                    pathColor: overallPercentage <= 50 ? 'green' : overallPercentage <= 75 ? 'blue' : 'red',
+                    textColor: 'black',
+                    trailColor: '#f0f0f0',
                   })}
                 />
               </div>
@@ -235,23 +205,25 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            <div className="bg-blue-200 p-4 rounded-lg shadow-md text-center" data-aos="fade-up">
+
+            {/* Plastic Bin */}
+            <div className="bg-yellow-100 p-4 rounded-lg shadow-md text-center" data-aos="fade-up">
               <h2 className="text-xl font-bold">Plastic Bin</h2>
-              <FaRecycle className="text-blue-600 text-4xl my-2" />
-              <p className="text-lg font-semibold">{plasticBin} / {maxCapacity}</p>
-              <div className="w-32 h-32 mx-auto">
+              <FaRecycle className="text-yellow-600 text-4xl my-2" />
+              <p className="text-lg font-semibold">{plasticBin} / {maxCapacity} kg</p>
+              <div className="w-24 h-24 mx-auto mt-4">
                 <CircularProgressbar
                   value={getPercentage(plasticBin)}
                   text={`${getPercentage(plasticBin)}%`}
                   styles={buildStyles({
-                    textSize: '18px',
-                    pathColor: getPercentage(plasticBin) <= 50 ? 'green' : getPercentage(plasticBin) <= 75 ? 'blue' : 'red',
-                    textColor: '#000',
-                    trailColor: '#d6d6d6',
+                    textSize: '16px',
+                    pathColor: overallPercentage <= 50 ? 'green' : overallPercentage <= 75 ? 'blue' : 'red',
+                    textColor: 'black',
+                    trailColor: '#f0f0f0',
                   })}
                 />
               </div>
-              <div className="flex justify-around mt-4">
+              <div className="flex justify-center mt-4">
               <button onClick={() => handleIncrease(setPlasticBin, plasticBin, 'plasticBin')} className="bg-blue-500 text-white rounded-full px-4 py-2 hover:bg-blue-600">
                   <FaRecycle /> Increase
                 </button>
@@ -260,23 +232,25 @@ export default function Home() {
                 </button>
               </div>
             </div>
-            <div className="bg-yellow-100 p-4 rounded-lg shadow-md text-center" data-aos="fade-left">
+
+            {/* Paper Bin */}
+            <div className="bg-blue-100 p-4 rounded-lg shadow-md text-center" data-aos="fade-left">
               <h2 className="text-xl font-bold">Paper Bin</h2>
-              <FaClipboardList className="text-yellow-600 text-4xl my-2" />
-              <p className="text-lg font-semibold">{paperBin} / {maxCapacity}</p>
-              <div className="w-32 h-32 mx-auto">
+              <FaClipboardList className="text-blue-600 text-4xl my-2" />
+              <p className="text-lg font-semibold">{paperBin} / {maxCapacity} kg</p>
+              <div className="w-24 h-24 mx-auto mt-4">
                 <CircularProgressbar
                   value={getPercentage(paperBin)}
                   text={`${getPercentage(paperBin)}%`}
                   styles={buildStyles({
-                    textSize: '18px',
-                    pathColor: getPercentage(paperBin) <= 50 ? 'green' : getPercentage(paperBin) <= 75 ? 'blue' : 'red',
-                    textColor: '#000',
-                    trailColor: '#d6d6d6',
+                    textSize: '16px',
+                    pathColor: overallPercentage <= 50 ? 'green' : overallPercentage <= 75 ? 'blue' : 'red',
+                    textColor: 'black',
+                    trailColor: '#f0f0f0',
                   })}
                 />
               </div>
-              <div className="flex justify-around mt-4">
+              <div className="flex justify-center mt-4">
               <button onClick={() => handleIncrease(setPaperBin, paperBin, 'paperBin')} className="bg-yellow-500 text-white rounded-full px-4 py-2 hover:bg-yellow-600">
                   <FaRecycle /> Increase
                 </button>
