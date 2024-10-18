@@ -63,7 +63,7 @@ function UpdateItem() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`/api/admin/getitem/${id}`);
+        const response = await fetch(`/api/adminuser/getitem/${id}`);
         const data = await response.json();
 
         if (data.success) {
@@ -119,7 +119,7 @@ function UpdateItem() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch(`/api/user/updateitem`, {
+      const response = await fetch(`/api/adminuser/updateitem`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

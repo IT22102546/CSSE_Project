@@ -25,6 +25,15 @@ export default function App() {
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
         <Route path="/resetpassword/:id/:token" element={<ResetPassword/>} />
 
+        <Route path="/Adminhome" element={<AnalyticalRepoart/>}></Route>
+        <Route path="/Adminsign-in" element={<AdminSignIn/>}></Route>
+        <Route path="/additem" element={<AddDetails/>}></Route>
+        <Route path="/Adminsign-up" element={<AdminSignUp/>}></Route>
+
+        
+         <Route path="/items" element={<ItemProfile/>}></Route>
+        <Route path="/update-item/:id" element={<UpdateItem/>}></Route>
+
 
 
 
@@ -45,13 +54,26 @@ export default function App() {
 
 
 
-
           
         <Route/> 
       </Routes>
     </BrowserRouter>
   )
 }
+
+
+import ItemProfile from './Pages/AdminAnalyticsComponent/ItemProfile';
+
+
+
+import AddDetails from './Pages/AdminAnalyticsComponent/AddDetails';
+import AnalyticalRepoart from './Pages/AdminAnalyticsComponent/ReportDetails';
+import AdminSignIn from './Pages/AdminAnalyticsComponent/AdminSignin';
+import AdminSignUp from './Pages/AdminAnalyticsComponent/AdminSignUp';
+
+import UpdateItem from './Pages/AdminAnalyticsComponent/UpdateItem';
+import AdminHeader from './admincomponents/header';
+
 
 
 
