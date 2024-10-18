@@ -26,6 +26,7 @@ export default function DashRequest() {
 
   const handleCompleteRequest = async (id) => {
     try {
+      // Mark the request as complete
       const res = await fetch(`/api/bin/bin/${id}`, {
         method: 'PUT',
         headers: {
@@ -35,12 +36,24 @@ export default function DashRequest() {
       });
   
       if (res.ok) {
-        const updatedRequests = await fetch('/api/bin/getbins');
-        const updatedData = await updatedRequests.json();
-        setRequests(updatedData.bins);
+        // Reset the bin levels
+        const resetRes = await fetch(`/api/bin/resetBins/${id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
   
-        // Notify homepage to update bins
-        localStorage.setItem('refreshBins', 'true'); // Set a flag in localStorage to signal update
+        if (resetRes.ok) {
+          const updatedRequests = await fetch('/api/bin/getbins');
+          const updatedData = await updatedRequests.json();
+          setRequests(updatedData.bins);
+  
+          // Notify homepage to update bins
+          localStorage.setItem('refreshBins', 'true'); // Set a flag in localStorage to signal update
+        } else {
+          console.error('Failed to reset bin levels.');
+        }
       } else {
         console.error('Failed to update request status.');
       }
@@ -48,6 +61,7 @@ export default function DashRequest() {
       console.error('Error completing request:', error);
     }
   };
+  
   
   return (
     <div className="table-auto overflow-x-scroll mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">

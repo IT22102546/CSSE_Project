@@ -78,4 +78,18 @@ export const getAllBins = async (req, res) => {
       res.status(500).json({ message: 'Server error', error });
     }
   };
+
+export const resetBins = async (req, res) => {
+
+    const { id } = req.params;
+  try {
+   
+    await Bin.updateOne({ _id: id }, { foodBin: 0, plasticBin: 0, paperBin: 0 });
+    res.status(200).json({ message: 'Bin levels reset successfully.' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error resetting bin levels.', error });
+  }
+};
+
+  
   

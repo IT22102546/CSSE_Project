@@ -152,6 +152,21 @@ export default function Home() {
     setOverallPercentage(calculateOverallPercentage());
   }, [foodBin, plasticBin, paperBin]);
 
+
+  useEffect(() => {
+    const refreshBins = localStorage.getItem('refreshBins');
+    if (refreshBins === 'true') {
+      setFoodBin(0);
+      setPlasticBin(0);
+      setPaperBin(0);
+      localStorage.setItem('foodBin', 0);
+      localStorage.setItem('plasticBin', 0);
+      localStorage.setItem('paperBin', 0);
+      localStorage.removeItem('refreshBins'); 
+    }
+  }, []);
+
+
   return (
     <div className="bg-green-50 min-h-screen flex flex-col items-center p-6">
       <h1 className="text-4xl font-bold text-center mb-6 text-green-800" data-aos="fade-up">Welcome to EcoWaste!</h1>
@@ -210,7 +225,7 @@ export default function Home() {
             <div className="bg-green-100 p-4 rounded-lg shadow-md text-center" data-aos="fade-right">
               <h2 className="text-xl font-bold">Food Bin</h2>
               <FaUtensils className="text-green-600 text-4xl my-2" />
-              <p className="text-lg font-semibold">{foodBin} / {maxCapacity} kg</p>
+              <p className="text-lg font-semibold">{foodBin} / {maxCapacity}</p>
               <div className="w-24 h-24 mx-auto mt-4">
                 <CircularProgressbar
                   value={getPercentage(foodBin)}
@@ -237,7 +252,7 @@ export default function Home() {
             <div className="bg-yellow-100 p-4 rounded-lg shadow-md text-center" data-aos="fade-up">
               <h2 className="text-xl font-bold">Plastic Bin</h2>
               <FaRecycle className="text-yellow-600 text-4xl my-2" />
-              <p className="text-lg font-semibold">{plasticBin} / {maxCapacity} kg</p>
+              <p className="text-lg font-semibold">{plasticBin} / {maxCapacity}</p>
               <div className="w-24 h-24 mx-auto mt-4">
                 <CircularProgressbar
                   value={getPercentage(plasticBin)}
@@ -264,7 +279,7 @@ export default function Home() {
             <div className="bg-blue-100 p-4 rounded-lg shadow-md text-center" data-aos="fade-left">
               <h2 className="text-xl font-bold">Paper Bin</h2>
               <FaClipboardList className="text-blue-600 text-4xl my-2" />
-              <p className="text-lg font-semibold">{paperBin} / {maxCapacity} kg</p>
+              <p className="text-lg font-semibold">{paperBin} / {maxCapacity} </p>
               <div className="w-24 h-24 mx-auto mt-4">
                 <CircularProgressbar
                   value={getPercentage(paperBin)}
