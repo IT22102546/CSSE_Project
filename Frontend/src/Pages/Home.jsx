@@ -216,7 +216,7 @@ export default function Home() {
                   text={`${getPercentage(foodBin)}%`}
                   styles={buildStyles({
                     textSize: '16px',
-                    pathColor: overallPercentage <= 50 ? 'green' : overallPercentage <= 75 ? 'blue' : 'red',
+                    pathColor: foodBin <= 50 ? 'green' : foodBin <= 75 ? 'blue' : 'red',
                     textColor: 'black',
                     trailColor: '#f0f0f0',
                   })}
@@ -243,7 +243,7 @@ export default function Home() {
                   text={`${getPercentage(plasticBin)}%`}
                   styles={buildStyles({
                     textSize: '16px',
-                    pathColor: overallPercentage <= 50 ? 'green' : overallPercentage <= 75 ? 'blue' : 'red',
+                    pathColor: plasticBin <= 50 ? 'green' : plasticBin <= 75 ? 'blue' : 'red',
                     textColor: 'black',
                     trailColor: '#f0f0f0',
                   })}
@@ -270,7 +270,7 @@ export default function Home() {
                   text={`${getPercentage(paperBin)}%`}
                   styles={buildStyles({
                     textSize: '16px',
-                    pathColor: overallPercentage <= 50 ? 'green' : overallPercentage <= 75 ? 'blue' : 'red',
+                    pathColor: paperBin <= 50 ? 'green' : paperBin <= 75 ? 'blue' : 'red',
                     textColor: 'black',
                     trailColor: '#f0f0f0',
                   })}
