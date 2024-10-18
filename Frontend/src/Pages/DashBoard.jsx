@@ -8,6 +8,7 @@ import DashResource from "../Components/DashResource";
 import DashRoutes from "../Components/DashRoutes";
 import DashIssueCollector from "../Components/DashIssueCollector";
 import AddTruckForm from "./AddTruckForm";
+import DashTrucks from "../Components/DashTrucks";
 
 
 
@@ -38,6 +39,7 @@ export default function DashBoard() {
       {tab === 'route' && <DashRoutes/>}
       {tab === 'reportIssue' && <DashIssueCollector/>}
       {tab === 'addtruck' && <AddTruckForm/>}
+      {tab === 'trucks' && <DashTrucks/> }
       
    
      

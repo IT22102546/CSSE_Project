@@ -9,6 +9,7 @@ import ForgetPassword from './Pages/ForgetPassword';
 import PrivateRoute from './Components/PrivateRoute';
 import DashBoard from './Pages/DashBoard';
 import AddTruckForm from './Pages/AddTruckForm';
+import UpdateTruck from './Pages/UpdateTruck';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
         <Route element={<PrivateRoute/>}/>
           <Route path="/dashboard" element={<DashBoard/>}/> 
           <Route path="/addtruck" element={<AddTruckForm/>}/>
+          <Route path="/update-truck/:id" element={<UpdateTruck/>}/>
         <Route/> 
       </Routes>
     </BrowserRouter>

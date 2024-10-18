@@ -4,10 +4,10 @@ import logger from "../utils/logger.js";
 
 // Create a new truck
 export const createTruck = async (req, res, next) => {
-  const { truckId, driver, capacity, location, route } = req.body;
+  const { truckId, driver, capacity, location, route, status } = req.body;
 
   // Validate inputs
-  if (!truckId || !driver || !capacity || !location || !route) {
+  if (!truckId || !driver || !capacity ) {
     logger.warn("Validation failed: Missing required fields");
     return next(errorHandler(400, "All fields are required"));
   }
@@ -24,6 +24,7 @@ export const createTruck = async (req, res, next) => {
       capacity,
       location,
       route,
+      status
     });
 
     await newTruck.save();
@@ -38,7 +39,7 @@ export const createTruck = async (req, res, next) => {
 // Update a truck
 export const updateTruck = async (req, res, next) => {
   const { id } = req.params;
-  const { truckId, driver, capacity, location, route } = req.body;
+  const { truckId, driver, capacity, location, route, status } = req.body;
 
   // Validate inputs if provided
   if (capacity !== undefined && (typeof capacity !== 'number' || capacity <= 0)) {
@@ -56,6 +57,7 @@ export const updateTruck = async (req, res, next) => {
           ...(capacity && { capacity }),
           ...(location && { location }),
           ...(route && { route }),
+          ...(status && { status})
         },
       },
       { new: true }

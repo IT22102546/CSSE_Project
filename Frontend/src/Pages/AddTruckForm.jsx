@@ -34,7 +34,7 @@ export default function AddTruckForm() {
     };
 
     try {
-      const response = await fetch('/api/trucks/add', {
+      const response = await fetch('/api/truck/add-truck', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', // Specify that the content is JSON

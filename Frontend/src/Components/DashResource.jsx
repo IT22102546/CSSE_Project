@@ -8,8 +8,8 @@ export default function DashResource() {
             <Link to='/addtruck'>
                 <button className='p-2 text-white bg-green-600 hover:bg-green-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>Add Truck</button>
             </Link>
-            <Link to='/dashboard?tab=submittedIssue'>
-                <button className='p-2 text-white bg-green-600 hover:bg-green-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>Reported Issues</button>
+            <Link to='/dashboard?tab=trucks'>
+                <button className='p-2 text-white bg-green-600 hover:bg-green-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>Available Trucks</button>
             </Link>
             <Link to='/dashboard?tab=resolvedIssue'>
                 <button className='p-2 text-white bg-green-600 hover:bg-green-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>Resolved Issues</button>
