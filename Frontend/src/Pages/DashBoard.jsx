@@ -6,6 +6,7 @@ import DashUsers from "../Components/DashUsers";
 import DashAssignedRoutes from "../Components/DashAssignedRoutes";
 import DashResource from "../Components/DashResource";
 import DashRoutes from "../Components/DashRoutes";
+import DashRequest from "../Components/DashRequest";
 
 
 
@@ -34,6 +35,7 @@ export default function DashBoard() {
       {tab === 'assignedRoutes' && <DashAssignedRoutes/>}
       {tab === 'resource' && <DashResource/>}
       {tab === 'route' && <DashRoutes/>}
+      {tab === 'request' && <DashRequest/>}
       
    
      
