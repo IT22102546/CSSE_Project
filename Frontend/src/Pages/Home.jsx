@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import WasteForm from '../Components/WasteForm'
-import WasteCollectorInterface from '../Components/DriverMap'
 import mapboxgl from 'mapbox-gl';
 
 

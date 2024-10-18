@@ -8,6 +8,7 @@ import ResetPassword from './Pages/ResetPassword';
 import ForgetPassword from './Pages/ForgetPassword';
 import PrivateRoute from './Components/PrivateRoute';
 import DashBoard from './Pages/DashBoard';
+import AddTruckForm from './Pages/AddTruckForm';
 
 export default function App() {
   return (
@@ -22,7 +23,7 @@ export default function App() {
 
         <Route element={<PrivateRoute/>}/>
           <Route path="/dashboard" element={<DashBoard/>}/> 
-          
+          <Route path="/addtruck" element={<AddTruckForm/>}/>
         <Route/> 
       </Routes>
     </BrowserRouter>
