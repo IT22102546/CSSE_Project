@@ -8,6 +8,8 @@ import trashIcon from '../assets/images/trashbg.png';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { FaTrash, FaRecycle, FaUtensils, FaClipboardList, FaLeaf } from 'react-icons/fa'; 
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWR3eDIwMDEiLCJhIjoiY20yZTdvMG04MDJodjJrcHZ6YXdwYnFqcyJ9.7xBkMPBN3cuuiFQSeJOnbA';
 
@@ -20,6 +22,8 @@ export default function Home() {
   const mapContainerRef = useRef(null);
   const mapInstance = useRef(null);
   const markerRef = useRef(null);
+  const navigate = useNavigate();
+  const { currentUser , loading } = useSelector(state => state.user);
 
   const maxCapacity = 100;
 
@@ -52,6 +56,28 @@ export default function Home() {
     const newValue = Math.max(binValue - maxCapacity * 0.05, 0);
     binSetter(newValue);
     localStorage.setItem(binType, newValue);
+  };
+
+  const goToForm = () => {
+    
+    const userId = currentUser._id; 
+    const userEmail = currentUser.email 
+    const userName = currentUser.username
+  
+    navigate('/request', {
+      state: {
+        userId,
+        userName,
+        userEmail,
+        foodBin,
+        plasticBin,
+        paperBin,
+        overallPercentage,
+        longitude,
+        latitude,
+        address,
+      },
+    });
   };
 
   useEffect(() => {
@@ -171,7 +197,7 @@ export default function Home() {
 
             {/* Conditionally show the "Collect Waste" button when the overall percentage exceeds 75% */}
             {overallPercentage > 75 && (
-              <button className="mt-4 bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-all">
+              <button className="mt-4 bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-all" onClick={goToForm}>
                 Collect Waste
               </button>
             )}
