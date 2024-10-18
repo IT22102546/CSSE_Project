@@ -1,0 +1,139 @@
+/* Form Container */
+.add-pet-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+  background: #fdfdfd; /* Clean white background */
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  margin-top: 4%;
+  font-family: 'Arial', sans-serif;
+}
+
+.add-pet-container h1 {
+  text-align: center;
+  font-size: 28px;
+  color: #333; /* Dark gray for text */
+  margin-bottom: 20px;
+}
+
+/* Error Message Styling */
+.error {
+  color: #e74c3c; /* Red for error messages */
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* Styling for upload progress or errors */
+.upload-progress-errors {
+  color: #e74c3c; /* Red for errors */
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Form Inputs */
+.add-pet-container input[type="text"],
+.add-pet-container input[type="file"] {
+  width: 100%;
+  padding: 12px;
+  margin: 12px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px; /* Rounded corners */
+  font-size: 16px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight inner shadow for depth */
+  transition: border 0.3s ease;
+}
+
+.add-pet-container input[type="text"]:focus,
+.add-pet-container input[type="file"]:focus {
+  border-color: #3498db; /* Blue border on focus */
+  outline: none;
+}
+
+/* Upload Button Styling */
+.upload-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.upload-button:hover {
+  background-color: #45a049; /* Darker green on hover */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow on hover */
+}
+
+.upload-button:active {
+  transform: scale(0.98); /* Slightly shrink on click */
+}
+
+/* Submit Button Styling */
+#submit-button {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#submit-button:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#submit-button:active {
+  transform: scale(0.98); /* Slight shrink effect on click */
+}
+
+/* Image Preview */
+.add-pet-container img {
+  width: 60px; /* Adjust size */
+  height: 60px; /* Adjust size */
+  margin: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid #3498db; /* Blue border for images */
+}
+
+.add-pet-container img:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow effect */
+}
+
+/* Upload Progress Styling */
+.upload-progress {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #3498db; /* Blue for progress */
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .add-pet-container {
+    padding: 20px;
+  }
+
+  .add-pet-container input[type="text"],
+  .add-pet-container input[type="file"] {
+    padding: 10px;
+  }
+
+  .upload-button,
+  #submit-button {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
