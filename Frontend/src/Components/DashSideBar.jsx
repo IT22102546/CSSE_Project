@@ -1,6 +1,6 @@
 import { Sidebar } from "flowbite-react";
 import { useEffect, useState } from "react";
-import { HiArchive, HiArrowSmRight, HiGift, HiOutlineUserGroup, HiUser} from 'react-icons/hi';
+import { HiArchive, HiArrowSmRight, HiGift, HiLink, HiOutlineArrowsExpand, HiOutlineCollection, HiOutlineFolder, HiOutlineQuestionMarkCircle, HiOutlineTerminal, HiOutlineUserGroup, HiUser} from 'react-icons/hi';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { signOut } from "../redux/user/userSlice";
@@ -41,7 +41,7 @@ export default function DashSideBar() {
             <Sidebar.Item 
               active={tab === 'profile'} 
               icon={HiUser} 
-              label={currentUser?.isAdmin ? 'Admin' : 'User'} 
+              label={currentUser?.isAdmin ? 'Admin' : 'Collector'} 
               labelColor='dark'
               as='div'
             >
@@ -61,10 +61,57 @@ export default function DashSideBar() {
                 </Sidebar.Item>
               </Link>
 
+              <Link to='/dashboard?tab=routes' key="routes">
+                <Sidebar.Item
+                  active={tab === 'routes'}
+                  icon={HiLink}
+                  as='div'
+                >
+                  Route Manage
+                </Sidebar.Item>
+              </Link>
+
+              <Link to='/dashboard?tab=resource' key="resource">
+                <Sidebar.Item
+                  active={tab === 'resource'}
+                  icon={HiOutlineFolder}
+                  as='div'
+                >
+                  Resource Manage
+                </Sidebar.Item>
+              </Link>
 
              
             </>
           )}
+
+          {currentUser?.isCollector && (
+            <>
+              <Link to='/dashboard?tab=assignedRoutes' key="assignedRoutes">
+                <Sidebar.Item
+                  active={tab === 'assignedRoutes'}
+                  icon={HiOutlineCollection}
+                  as='div'
+                >
+                  Assigned Routes
+                </Sidebar.Item>
+              </Link>
+
+              <Link to='/dashboard?tab=reportIssue' key="reportIssue">
+                <Sidebar.Item
+                  active={tab === 'reportIssue'}
+                  icon={HiOutlineQuestionMarkCircle}
+                  as='div'
+                >
+                  Report Issue
+                </Sidebar.Item>
+              </Link>
+
+
+             
+            </>
+          )}
+
 
               
              

@@ -8,20 +8,44 @@ import ResetPassword from './Pages/ResetPassword';
 import ForgetPassword from './Pages/ForgetPassword';
 import PrivateRoute from './Components/PrivateRoute';
 import DashBoard from './Pages/DashBoard';
+import CollectionRequestForm from './Pages/CollectionRequestForm';
 
 export default function App() {
   return (
     <BrowserRouter>
       <Header/>
       <Routes>
+
+
+
+        
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<SignUp/>}/>
         <Route path="/sign-in" element={<SignIn/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
         <Route path="/resetpassword/:id/:token" element={<ResetPassword/>} />
 
+
+
+
+
+
+
         <Route element={<PrivateRoute/>}/>
+
+
+
           <Route path="/dashboard" element={<DashBoard/>}/> 
+          <Route path="/request" element={<CollectionRequestForm/>}/> 
+
+
+
+
+
+
+
+
+
           
         <Route/> 
       </Routes>
