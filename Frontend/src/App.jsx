@@ -6,6 +6,8 @@ import SignUp from './Pages/SignUp';
 import SignIn from './Pages/SignIn';
 import ResetPassword from './Pages/ResetPassword';
 import ForgetPassword from './Pages/ForgetPassword';
+import PrivateRoute from './Components/PrivateRoute';
+import DashBoard from './Pages/DashBoard';
 
 export default function App() {
   return (
@@ -17,6 +19,11 @@ export default function App() {
         <Route path="/sign-in" element={<SignIn/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
         <Route path="/resetpassword/:id/:token" element={<ResetPassword/>} />
+
+        <Route element={<PrivateRoute/>}/>
+          <Route path="/dashboard" element={<DashBoard/>}/> 
+          
+        <Route/> 
       </Routes>
     </BrowserRouter>
   )
