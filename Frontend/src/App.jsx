@@ -15,15 +15,37 @@ export default function App() {
     <BrowserRouter>
       <Header/>
       <Routes>
+
+
+
+        
         <Route path="/" element={<Home />} />
         <Route path="/sign-up" element={<SignUp/>}/>
         <Route path="/sign-in" element={<SignIn/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
         <Route path="/resetpassword/:id/:token" element={<ResetPassword/>} />
 
+
+
+
+
+
+
         <Route element={<PrivateRoute/>}/>
+
+
+
           <Route path="/dashboard" element={<DashBoard/>}/> 
           <Route path="/request" element={<CollectionRequestForm/>}/> 
+
+
+
+
+
+
+
+
+
           
         <Route/> 
       </Routes>
