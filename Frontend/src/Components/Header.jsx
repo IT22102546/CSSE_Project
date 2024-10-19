@@ -99,13 +99,7 @@ export default function Header() {
         </div>
 
         <div className="hidden md:flex space-x-8 items-center">
-          {currentUser && (
-            <Link to="/cart">
-              <div className="flex relative">
-                <HiShoppingBag className="mr-1" style={{ fontSize: "24px" }} />
-              </div>
-            </Link>
-          )}
+          
 
           {currentUser ? (
             <Dropdown
