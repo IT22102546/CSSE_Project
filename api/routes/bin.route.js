@@ -1,6 +1,6 @@
 // routes/binRoutes.js
 import express from 'express';
-import { createOrUpdateBin, getAllBins, resetBins, updateBinRequest } from '../controllers/bin.controller.js';
+import { createOrUpdateBin, getAllBins, getUserRequests, resetBins, updateBinRequest } from '../controllers/bin.controller.js';
 
 const router = express.Router();
 
@@ -8,6 +8,8 @@ const router = express.Router();
 router.post('/createbin', createOrUpdateBin);
 router.get('/getbins', getAllBins);
 router.put('/bin/:id', updateBinRequest);
-router.put('/resetBins/:id',resetBins)
+router.put('/resetBins/:id',resetBins);
+router.get('/requests/:userId', getUserRequests);
+
 
 export default router;

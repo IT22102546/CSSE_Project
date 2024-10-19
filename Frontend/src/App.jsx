@@ -14,6 +14,7 @@ import SubmitIssue from './Pages/SubmitIssue';
 import UpdateCollectorIssue from './Pages/UpdateCollectorIssue';
 import CollectionRequestForm from './Pages/CollectionRequestForm';
 import OrderSummary from './Pages/OrderSummary';
+import RequestSuccess from './Pages/RequestSuccess';
 
 
 export default function App() {
@@ -50,6 +51,7 @@ export default function App() {
           <Route path="/update-issue/:id" element={<UpdateCollectorIssue/>}/>
 
           <Route path="/request" element={<CollectionRequestForm/>}/> 
+          <Route path="/request-success" element={<RequestSuccess/>}/> 
           
 
 

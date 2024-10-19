@@ -33,7 +33,6 @@ export default function Home() {
     const savedValue = localStorage.getItem(binType);
     return savedValue ? parseFloat(savedValue) : 0;
   };
-
   const [foodBin, setFoodBin] = useState(getInitialBinValue('foodBin')); 
   const [plasticBin, setPlasticBin] = useState(getInitialBinValue('plasticBin')); 
   const [paperBin, setPaperBin] = useState(getInitialBinValue('paperBin')); 
@@ -59,6 +58,18 @@ export default function Home() {
     binSetter(newValue);
     localStorage.setItem(binType, newValue);
   };
+
+
+  const shouldShowRequestButton = () => {
+    return (
+      getPercentage(foodBin) > 75 ||
+      getPercentage(plasticBin) > 75 ||
+      getPercentage(paperBin) > 75
+    );
+  };
+
+
+  
 
   const goToForm = () => {
     
@@ -235,8 +246,11 @@ export default function Home() {
           </div>
 
             {/* Conditionally show the "Collect Waste" button when the overall percentage exceeds 75% */}
-            {overallPercentage > 75 && (
-              <button className="mt-4 bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-all" onClick={goToForm}>
+            {shouldShowRequestButton() && (
+              <button
+                className="mt-4 bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-all"
+                onClick={goToForm}
+              >
                 Collect Waste
               </button>
             )}

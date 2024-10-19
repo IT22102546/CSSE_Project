@@ -52,8 +52,8 @@ export const createSession = async (req, res) => {
               quantity: 1,
           }],
           mode: 'payment',
-          success_url: 'http://localhost:5173/order-pay-success',
-          cancel_url: 'http://localhost:5173/cart',
+          success_url: 'http://localhost:5173/request-success',
+          cancel_url: 'http://localhost:5173/order-summary',
       });
 
       res.json({ url: session.url });
