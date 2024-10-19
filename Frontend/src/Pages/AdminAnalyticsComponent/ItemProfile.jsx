@@ -5,7 +5,7 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Link } from 'react-router-dom';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { storage } from '../../firebase'; // Adjust the path as per your project structure
-import '../css/itemprofile.css';
+import '../Admincss/itemprofile.css';
 import { useReactToPrint } from 'react-to-print';
 
 export default function ItemProfile() {

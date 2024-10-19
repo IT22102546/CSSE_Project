@@ -1,6 +1,6 @@
 import  { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
-import '../css/AdminLogin.css'
+import '../Admincss/AdminLogin.css'
 
 export default function AdminSignIn() {
   const navigate=useNavigate();

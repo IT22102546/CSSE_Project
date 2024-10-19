@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import '../css/updateitem.css';
+import '../Admincss/updateitem.css';
 import { app } from '../../firebase';
 import { getStorage, uploadBytesResumable, ref, getDownloadURL } from 'firebase/storage';
 

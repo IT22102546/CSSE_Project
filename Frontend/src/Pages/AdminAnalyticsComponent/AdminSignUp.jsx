@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import {useNavigate} from 'react-router-dom'
-import '../css/AdminRegister.css'
+import '../Admincss/AdminRegister.css'
 
 export default function AdminSignUp() {
   const [order, setOrder] = useState({

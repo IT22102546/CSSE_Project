@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { app } from '../../firebase';
 import { useSelector } from 'react-redux';
 import { getStorage, uploadBytesResumable, ref, getDownloadURL } from 'firebase/storage';
-import '../css/adddetails.css';
+import '../Admincss/adddetails.css';
 
 export default function AddDetails() {
   const [imagePercent, setImagePercent] = useState(0);

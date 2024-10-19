@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import { Bar, Pie, Line } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, PointElement, LineElement, ArcElement } from 'chart.js';
-import '../css/itemrepoart.css';
+import '../Admincss/itemrepoart.css';
 import { useReactToPrint } from 'react-to-print';
 
 // Register ChartJS components
