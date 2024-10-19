@@ -1,13 +1,13 @@
-import AssignRoute from "../models/assignRoute.model.js";
+import AssignRoute from "../models/assignedRoute.model.js";
 import { errorHandler } from "../utils/error.js";
 import logger from "../utils/logger.js";
 
 // Create a new assigned route
 export const createAssignedRoute = async (req, res, next) => {
-  const { userId, userName, longitude, latitude, address, driverId, truckId, status } = req.body;
+  const { binId,userId, userName, longitude, latitude, address, truckId, status } = req.body;
 
   // Validate inputs
-  if (!userId || !userName || !longitude || !latitude || !address || !driverId || !truckId) {
+  if (!userId || !userName || !longitude || !latitude || !address || !truckId) {
     logger.warn("Validation failed: Missing required fields");
     return next(errorHandler(400, "All fields are required"));
   }
@@ -19,12 +19,12 @@ export const createAssignedRoute = async (req, res, next) => {
 
   try {
     const newAssignedRoute = new AssignRoute({
+      binId,
       userId,
       userName,
       longitude,
       latitude,
       address,
-      driverId,
       truckId,
       status
     });

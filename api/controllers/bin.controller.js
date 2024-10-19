@@ -85,8 +85,9 @@ export const getAllBins = async (req, res) => {
   };
 
 export const resetBins = async (req, res) => {
-
+    console.log("from backend")
     const { id } = req.params;
+    console.log(id)
   try {
    
     await Bin.updateOne({ _id: id }, { foodBin: 0, plasticBin: 0, paperBin: 0 });

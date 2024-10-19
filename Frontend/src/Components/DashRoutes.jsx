@@ -18,8 +18,10 @@ export default function DashRequest() {
         const res = await fetch('/api/bin/getbins');
         const data = await res.json();
         if (res.ok) {
-          setRequests(data.bins);
-          console.log('Fetched bin locations:', data.bins);
+          // Filter bins where isRequested is true
+          const filteredBins = data.bins.filter((bin) => bin.isRequested === true);
+          setRequests(filteredBins);
+          console.log('Fetched bin locations with isRequested = true:', filteredBins);
         }
       } catch (error) {
         console.error('Error fetching requests:', error);
@@ -27,9 +29,10 @@ export default function DashRequest() {
         setLoading(false);
       }
     };
-
+  
     fetchRequests();
   }, []);
+  
 
   useEffect(() => {
     if (!map && requests.length > 0) {
@@ -136,6 +139,11 @@ export default function DashRequest() {
     <div className="p-4">
       <div className="w-full max-w-5xl mx-auto">
         <h1 className="text-xl font-bold mb-4 text-left">Collection Requests</h1>
+          <div className='mb-5'>
+          <Link to='/dashboard?tab=AssignedroutesAdminView'>
+                <button className='p-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>View truck assign</button>
+          </Link>
+          </div>
         <div id="map" className="w-full h-[60vh] mb-6 rounded-lg shadow-md mx-auto"></div>
 
         {loading ? (
@@ -149,7 +157,6 @@ export default function DashRequest() {
                 <Table.HeadCell>Address</Table.HeadCell>
                 <Table.HeadCell>Bin Levels</Table.HeadCell>
                 <Table.HeadCell>Overall Percentage</Table.HeadCell>
-                <Table.HeadCell>Actions</Table.HeadCell>
                 <Table.HeadCell>Assign Route</Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
@@ -166,14 +173,6 @@ export default function DashRequest() {
                       <div>Paper Bin: {request.binLevels.paperBin}%</div>
                     </Table.Cell>
                     <Table.Cell>{request.overallPercentage}%</Table.Cell>
-                    <Table.Cell>
-                      {request.isRequested ? (
-                        <button className="text-red-500">Complete Request</button>
-                      ) : (
-                        <span className="text-green-500">Completed</span>
-                      )}
-                      
-                    </Table.Cell>
                     <Table.Cell>
                     <Link to={`/assign-route/${request._id}`}>
                       <Button size="xs" color="success">

@@ -1,6 +1,9 @@
 import mongoose from 'mongoose';
 
 const AssignRouteSchema = new mongoose.Schema({
+  binId:{
+    type: String,
+  },
   userId: {
     type: String,
     required: true,
@@ -22,14 +25,9 @@ const AssignRouteSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  driverId: {
-    type: String,
-    ref: 'Driver',
-    required: true,
-  },
+  
   truckId: {
     type: String,
-    ref: 'Truck',
     required: true,
   },
   status: {
