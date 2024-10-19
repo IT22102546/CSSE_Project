@@ -52,3 +52,8 @@ app.use((err,req,res,next)=>{
     });
 })
 
+import adminRoutes from './routes/admin.routes.js'
+import adminauthroutes from './routes/adminauth.routes.js'
+
+app.use("/api/adminuser",adminRoutes)
+app.use("/api/adminauth",adminauthroutes)
