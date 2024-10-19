@@ -11,6 +11,7 @@ import DashBoard from './Pages/DashBoard';
 import AddTruckForm from './Pages/AddTruckForm';
 import UpdateTruck from './Pages/UpdateTruck';
 import CollectionRequestForm from './Pages/CollectionRequestForm';
+import OrderSummary from './Pages/OrderSummary';
 
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
         <Route path="/sign-in" element={<SignIn/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
         <Route path="/resetpassword/:id/:token" element={<ResetPassword/>} />
+        <Route path="/order-summary" element={<OrderSummary/>} />
 
 
 
@@ -44,6 +46,7 @@ export default function App() {
           <Route path="/update-truck/:id" element={<UpdateTruck/>}/>
 
           <Route path="/request" element={<CollectionRequestForm/>}/> 
+          
 
 
         <Route/> 
