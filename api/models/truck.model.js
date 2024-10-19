@@ -7,8 +7,8 @@ const collectionTruckSchema = new mongoose.Schema({
         unique: true // Each truck should have a unique ID
     },
     driver: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Reference to the User model for driver details
+        type: String,
+
         required: true
     },
     capacity: {
@@ -27,6 +27,10 @@ const collectionTruckSchema = new mongoose.Schema({
         type: [String], // Array to store route points or waypoints (can be strings representing locations or GPS coordinates)
         default : "Not assigned yet"
     },
+    status:{
+        type: Boolean,
+        default : false,
+    }
 }, { timestamps: true });
 
 const CollectionTruck = mongoose.model('CollectionTruck', collectionTruckSchema);
