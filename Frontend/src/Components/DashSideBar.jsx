@@ -1,6 +1,6 @@
 import { Sidebar } from "flowbite-react";
 import { useEffect, useState } from "react";
-import { HiArchive, HiArrowSmRight, HiGift, HiLink, HiOutlineArrowsExpand, HiOutlineCollection, HiOutlineDocument, HiOutlineFolder, HiOutlineQuestionMarkCircle, HiOutlineTerminal, HiOutlineUserGroup, HiUser} from 'react-icons/hi';
+import { HiArchive, HiArrowSmRight, HiGift, HiLink, HiOutlineArrowsExpand, HiOutlineCollection, HiOutlineDocument, HiOutlineFolder, HiOutlineQuestionMarkCircle, HiOutlineTerminal, HiOutlineUserGroup, HiQuestionMarkCircle, HiUser} from 'react-icons/hi';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { signOut } from "../redux/user/userSlice";
@@ -81,6 +81,7 @@ export default function DashSideBar() {
                   Route Manage
                 </Sidebar.Item>
               </Link>
+              
 
               <Link to='/dashboard?tab=resource' key="resource">
                 <Sidebar.Item
@@ -89,6 +90,15 @@ export default function DashSideBar() {
                   as='div'
                 >
                   Resource Manage
+                </Sidebar.Item>
+              </Link>
+              <Link to='/dashboard?tab=complain' key="complain">
+                <Sidebar.Item
+                  active={tab === 'complain'}
+                  icon={HiQuestionMarkCircle}
+                  as='div'
+                >
+                  Complaints
                 </Sidebar.Item>
               </Link>
 
