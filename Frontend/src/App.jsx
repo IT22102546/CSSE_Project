@@ -15,6 +15,8 @@ import UpdateCollectorIssue from './Pages/UpdateCollectorIssue';
 import CollectionRequestForm from './Pages/CollectionRequestForm';
 import OrderSummary from './Pages/OrderSummary';
 import RequestSuccess from './Pages/RequestSuccess';
+import AboutUs from './Pages/AboutUs';
+import ContactUs from './Pages/ContactUs';
 
 
 export default function App() {
@@ -32,6 +34,8 @@ export default function App() {
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
         <Route path="/resetpassword/:id/:token" element={<ResetPassword/>} />
         <Route path="/order-summary" element={<OrderSummary/>} />
+        <Route path="/about" element={<AboutUs/>} />
+        <Route path="/contact" element={<ContactUs/>} />
 
        
         

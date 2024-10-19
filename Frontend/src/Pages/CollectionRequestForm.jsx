@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { FaUser, FaEnvelope, FaMapMarkerAlt, FaTrashAlt, FaRecycle, FaMapSigns } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWR3eDIwMDEiLCJhIjoiY20yZTdvMG04MDJodjJrcHZ6YXdwYnFqcyJ9.7xBkMPBN3cuuiFQSeJOnbA';
 
@@ -23,6 +26,10 @@ export default function CollectionRequestForm() {
   const markerRef = useRef(null);
   const navigate = useNavigate();
   const location = useLocation();
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
 
   useEffect(() => {
     if (location.state) {
@@ -109,81 +116,105 @@ export default function CollectionRequestForm() {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4">Waste Collection Request</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold">Name:</label>
-          <input
-            type="text"
-            value={userName}
-            disabled
-            className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-indigo-500 sm:text-sm"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold">Email:</label>
-          <input
-            type="email"
-            value={userEmail}
-            disabled
-            className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-indigo-500 sm:text-sm"
-          />
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold">Location:</label>
-          <div ref={mapContainerRef} className="w-full h-64 rounded-md bg-gray-200" />
-          {address && <p className="mt-2 text-gray-500">{address}</p>}
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-gray-700 font-semibold">Overall Bin Fill Percentage:</label>
-          <input
-            type="text"
-            value={`${overallPercentage}%`}
-            disabled
-            className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-indigo-500 sm:text-sm"
-          />
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold">Food Bin Level:</label>
+    <div className="bg-gradient-to-b from-green-100 via-blue-100 to-purple-100 p-6 rounded-lg shadow-lg max-w-4xl mx-auto mt-8" data-aos="fade-up">
+      <h2 className="text-3xl font-bold text-center text-blue-900 mb-6">Waste Collection Request</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        
+        {/* User Details */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div data-aos="fade-right">
+            <label className="flex items-center space-x-2 text-gray-700 font-semibold">
+              <FaUser className="text-green-600" />
+              <span>Name:</span>
+            </label>
             <input
               type="text"
-              value={`${binLevels.foodBin} / 100`}
+              value={userName}
               disabled
-              className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm"
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold">Plastic Bin Level:</label>
+          <div data-aos="fade-left">
+            <label className="flex items-center space-x-2 text-gray-700 font-semibold">
+              <FaEnvelope className="text-blue-600" />
+              <span>Email:</span>
+            </label>
             <input
-              type="text"
-              value={`${binLevels.plasticBin} / 100`}
+              type="email"
+              value={userEmail}
               disabled
-              className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-indigo-500 sm:text-sm"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold">Paper Bin Level:</label>
-            <input
-              type="text"
-              value={`${binLevels.paperBin} / 100`}
-              disabled
-              className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:border-indigo-500 sm:text-sm"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm"
             />
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="mt-4 w-full bg-green-600 text-white py-2 rounded-lg shadow-lg hover:bg-green-700 transition-all"
-        >
-          Go to Order Summary
-        </button>
+        {/* Map Section */}
+        <div data-aos="fade-up">
+          <label className="flex items-center space-x-2 text-gray-700 font-semibold">
+            <FaMapMarkerAlt className="text-red-600" />
+            <span>Location:</span>
+          </label>
+          <div ref={mapContainerRef} className="w-full h-64 rounded-md bg-gray-200 mt-2 shadow-lg" />
+          {address && <p className="mt-2 text-gray-500 text-center">{address}</p>}
+        </div>
+
+        {/* Bin Levels */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4" data-aos="fade-up">
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <label className="flex items-center space-x-2 text-gray-700 font-semibold">
+              <FaTrashAlt className="text-yellow-600" />
+              <span>Food Bin Level:</span>
+            </label>
+            <input
+              type="text"
+              value={`${binLevels.foodBin}%`}
+              disabled
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <label className="flex items-center space-x-2 text-gray-700 font-semibold">
+              <FaRecycle className="text-blue-600" />
+              <span>Plastic Bin Level:</span>
+            </label>
+            <input
+              type="text"
+              value={`${binLevels.plasticBin}%`}
+              disabled
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-md">
+            <label className="flex items-center space-x-2 text-gray-700 font-semibold">
+              <FaRecycle className="text-green-600" />
+              <span>Paper Bin Level:</span>
+            </label>
+            <input
+              type="text"
+              value={`${binLevels.paperBin}%`}
+              disabled
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+        </div>
+
+        {/* Overall Percentage */}
+        <div className="bg-white p-4 rounded-lg shadow-md text-center" data-aos="fade-up">
+          <label className="flex justify-center items-center space-x-2 text-gray-700 font-semibold">
+            <FaMapSigns className="text-purple-600" />
+            <span>Overall Bin Fill Percentage:</span>
+          </label>
+          <p className="text-xl font-bold text-gray-800 mt-2">{overallPercentage}%</p>
+        </div>
+
+        <div className="text-center" data-aos="">
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white py-2 rounded-lg shadow-lg hover:bg-green-700 transition-all focus:outline-none focus:ring-4 focus:ring-green-300"
+          >
+            Go to Request Summary
+          </button>
+        </div>
       </form>
     </div>
   );

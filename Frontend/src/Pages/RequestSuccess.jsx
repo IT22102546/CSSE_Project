@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { FaCheckCircle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom'; 
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS styles
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function RequestSuccess() {
   const navigate = useNavigate(); 
@@ -12,23 +12,24 @@ export default function RequestSuccess() {
   }, []);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-green-50">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md text-center">
-        <div className="mb-4" data-aos="fade-up">
-          <FaCheckCircle className="text-green-500 text-6xl mb-2" />
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-100 via-blue-100 to-purple-100">
+      <div className="bg-white shadow-2xl rounded-lg p-8 max-w-md text-center" data-aos="zoom-in" data-aos-duration="1000">
+        <div className="mb-6" data-aos="flip-up" data-aos-delay="200">
+          <FaCheckCircle className="text-green-500 text-8xl mb-4 animate-pulse" />
         </div>
-        <h1 className="text-2xl font-bold mb-2" data-aos="fade-up">
-          Success!
+        <h1 className="text-3xl font-extrabold text-gray-800 mb-4" data-aos="fade-up" data-aos-delay="400">
+          Request Successful!
         </h1>
-        <p className="text-gray-700 mb-4" data-aos="fade-up">
-          Your request has been successfully submitted.
+        <p className="text-lg text-gray-600 mb-4" data-aos="fade-up" data-aos-delay="500">
+          Your waste collection request has been successfully submitted.
         </p>
-        <p className="text-gray-600 mb-6" data-aos="fade-up">
-          Thank you for helping us keep the environment clean. We will get back to you shortly.
+        <p className="text-base text-gray-500 mb-8" data-aos="fade-up" data-aos-delay="600">
+          Thank you for your contribution to a cleaner environment. We’ll process your request shortly.
         </p>
         <button 
-          className="bg-green-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 hover:bg-green-600" 
+          className="bg-green-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:bg-green-600 transition duration-300 transform hover:scale-105" 
           data-aos="fade-up" 
+          data-aos-delay="700"
           onClick={() => navigate('/dashboard?tab=myrequest')} 
         >
           Go to Dashboard
