@@ -14,6 +14,7 @@ import DashComplain from "../Components/DashComplain";
 import CollectorIssueAdmin from "./CollectorIssueAdmin";
 
 import DashRequest from "../Components/DashRequest";
+import Bindetails from "./Bindetails";
 
 
 
@@ -50,6 +51,7 @@ export default function DashBoard() {
       {tab === 'complain' && <DashComplain/>}
       {tab === 'CollectorIssuesRecieved' && <CollectorIssueAdmin/>}
       {tab === 'request' && <DashRequest/>}
+      {tab === 'bindetails' && <Bindetails/>}
 
       
    

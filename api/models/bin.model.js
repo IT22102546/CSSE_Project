@@ -51,6 +51,6 @@ const binSchema = new mongoose.Schema({
     default:false
   },
 
-});
+},{ timestamps: true });
 
 export default mongoose.model('Bin', binSchema);
