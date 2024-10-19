@@ -94,6 +94,7 @@ export default function Header() {
             >
               Blogs
             </NavLink>
+           
           </div>
         </div>
 

@@ -1,0 +1,120 @@
+/* General Styles */
+.nav {
+  background-color: #0D47A1;  /* Deep blue background */
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.nav:hover {
+  background-color: #1565C0;  /* Lighter blue on hover */
+}
+
+/* Website name style */
+.twebpagename {
+  color: white;
+  font-size: 2.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  transition: color 0.3s ease;
+}
+
+.twebpagename:hover {
+  color: #FFC107;  /* Gold hover effect */
+}
+
+/* Navbar container */
+.navbardetails {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Link styles */
+.other-topics {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.other-topics li {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+}
+
+.other-topics li:hover {
+  color: #0D47A1;  /* Blue text on hover */
+  background-color: #FFC107;  /* Gold background on hover */
+  transform: scale(1.1);
+}
+
+/* Profile picture styling */
+img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #FFC107;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.2);
+  border-color: #FFEB3B;  /* Lighter gold on hover */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .other-topics {
+    flex-direction: column;
+    position: absolute;
+    right: 1rem;
+    top: 5rem;
+    background-color: #0D47A1;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    display: none;
+  }
+
+  .navbardetails.active .other-topics {
+    display: flex;
+  }
+
+  .twebpagename {
+    font-size: 2rem;
+  }
+}
+
+/* Burger menu icon for mobile */
+.burger-menu {
+  display: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .burger-menu {
+    display: block;
+  }
+}
+
+/* Add transition to the navigation background when scrolling */
+.nav.scrolled {
+  background-color: #1565C0;
+}

@@ -1,0 +1,242 @@
+.report {
+  font-family: 'Roboto', sans-serif;
+  padding: 30px;
+  max-width: 100%;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #c6d17d, #62bcbe);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+  color: #2c3e50;
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 18px;
+  color: #7f8c8d;
+}
+
+.chart-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px; /* Space between charts */
+  background: linear-gradient(135deg, #dce59d, #2ca6a8);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.bar-chart {
+  flex: 1 1 45%; /* Take 45% of the space */
+  max-width: 45%; /* Maximum width */
+  max-height: 400px;
+   /* Maximum height */
+}
+
+.pie-chart {
+  flex: 1 1 300%; /* Take 30% of the space */
+  max-width: 30%; /* Maximum width */
+  max-height: 250px;
+  
+  
+}
+
+.line-chart {
+  flex: 1 1 90%; /* Take 90% of the width */
+  max-width: 90%; /* Maximum width */
+  max-height: 200px;
+  margin-left: 50%;
+  margin-top: -2%; /* Center it a bit better */
+}
+
+/* Styling for PDF content */
+.pdf-content {
+  padding: 20px;
+  background: linear-gradient(135deg, #dce59d, #2ca6a8);
+  border-radius: 8px;
+}
+
+.pdf-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 26px;
+  color: #2980b9;
+  font-weight: 700;
+}
+
+/* Styling for the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  border-radius: 8px; /* Rounded table edges */
+  overflow: hidden; /* Ensure roundness on all sides */
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+}
+
+th, td {
+  padding: 14px 20px; /* Extra padding for breathing space */
+  text-align: left;
+  font-size: 16px;
+}
+
+th {
+  background-color: #3498db; /* Softer, appealing blue */
+  color: white;
+  text-transform: uppercase; /* Make headers bold and capitalized */
+  letter-spacing: 1px; /* Add space between letters */
+  font-weight: 600; /* Thicker font for headers */
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9; /* Light grey for even rows */
+}
+
+tr:nth-child(odd) {
+  background-color: #ffffff; /* Ensure odd rows have a clean white background */
+}
+
+tr:hover {
+  background-color: #f1c40f; /* Highlight row on hover with gold color */
+  cursor: pointer; /* Show pointer on hover */
+  transform: scale(1.02); /* Slightly enlarge row on hover */
+  transition: all 0.3s ease; /* Smooth transition on hover */
+}
+
+td {
+  color: #2c3e50; /* Darker text for better readability */
+}
+
+caption {
+  caption-side: top;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #34495e;
+}
+
+/* Styling for the main topic heading */
+#main-topic {
+  font-size: 20px;
+  font-weight: bold;
+  color: #2c3e50;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 2px;
+  padding: 20px;
+  width: 30%;
+  background: linear-gradient(135deg, #16a085, #f4d03f);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, background 0.3s ease;
+  margin: 0 auto 20px auto;
+}
+
+#main-topic:hover {
+  transform: scale(1.05);
+  background: linear-gradient(135deg, #f4d03f, #16a085);
+  cursor: pointer;
+}
+
+/* Styling for the total count display */
+#total {
+  position: absolute;
+  left: 58%;
+  top: 65%;
+  transform: translate(-50%, -50%);
+  padding: 15px 30px;
+  background-color: #3498db;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  z-index: 10;
+}
+
+#total:hover {
+  background-color: #2980b9;
+  transform: translate(-50%, -50%) scale(1.05);
+  cursor: pointer;
+}
+
+/* Button styles */
+button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #3498db;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
+}
+
+/* Specific style for report download button */
+#report-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 12px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  letter-spacing: 1px;
+  margin-left: 40%;
+}
+
+#report-btn:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+#report-btn:active {
+  transform: scale(0.98);
+}
+#para {
+  position: absolute;
+  top:102%;
+  left: 4%;
+  font-family: 'Roboto', sans-serif; /* Modern font */
+  font-size: 16px; /* Comfortable reading size */
+  color: #2c3e50; /* Dark blue color for text */
+  text-align: center; /* Center the text */
+  line-height: 1.4; /* Improve readability with spacing */
+  margin: 20px auto; /* Center with top and bottom spacing */
+  width: 40%; /* Constrain width for better layout */
+  background: linear-gradient(135deg, #0f5f9c, #05e4ec); /* Gradient background */
+  color: white; /* White text color */
+  padding: 15px; /* Add padding around text */
+  border-radius: 10px; /* Smooth rounded corners */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  letter-spacing: 1px; /* Add space between letters */
+  transition: transform 0.3s ease, background 0.3s ease; /* Smooth hover transition */
+}
+
+#para:hover {
+  transform: scale(1.05); /* Slightly grow on hover */
+  background: linear-gradient(135deg, #f4d03f, #16a085); /* Reverse gradient on hover */
+  cursor: pointer; /* Pointer cursor on hover */
+}
