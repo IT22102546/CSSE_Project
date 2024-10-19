@@ -14,6 +14,9 @@ import DashComplain from "../Components/DashComplain";
 import CollectorIssueAdmin from "./CollectorIssueAdmin";
 
 import DashRequest from "../Components/DashRequest";
+import Bindetails from "./Bindetails";
+import DashAdminViewAssignedRoutes from "../Components/DashAdminViewAssignedRoutes";
+import CollectionMap from "./CollectionMap";
 import DashMyRequest from "../Components/DashMyRequest";
 
 
@@ -48,7 +51,11 @@ export default function DashBoard() {
       {tab === 'complain' && <DashComplain/>}
       {tab === 'CollectorIssuesRecieved' && <CollectorIssueAdmin/>}
       {tab === 'request' && <DashRequest/>}
+      {tab === 'bindetails' && <Bindetails/>}
+      {tab === 'AssignedroutesAdminView' && <DashAdminViewAssignedRoutes/>}
+      {tab === 'collectionmap' && <CollectionMap/>}
       {tab === 'myrequest' && <DashMyRequest/>}
+
 
       
    
