@@ -17,6 +17,8 @@ import OrderSummary from './Pages/OrderSummary';
 import RequestSuccess from './Pages/RequestSuccess';
 import AboutUs from './Pages/AboutUs';
 import ContactUs from './Pages/ContactUs';
+import Footer from './Components/Footer';
+
 
 
 export default function App() {
@@ -64,6 +66,7 @@ export default function App() {
 
         <Route/> 
       </Routes>
+      <Footer/>
     </BrowserRouter>
   )
 }
