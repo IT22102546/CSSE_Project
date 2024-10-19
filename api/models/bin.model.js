@@ -44,6 +44,12 @@ const binSchema = new mongoose.Schema({
         type: Number,
         default: 0
     },
+
+    totalPrice: {
+        type: Number,
+       
+    },
+
     isRequested: {
         type: Boolean,
         default: false
@@ -51,3 +57,4 @@ const binSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 export default mongoose.model('Bin', binSchema);
+

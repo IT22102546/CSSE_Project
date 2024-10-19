@@ -17,7 +17,8 @@ export const createSession = async (req, res) => {
       longitude,
       latitude,
       address,
-      overallPercentage
+      overallPercentage,
+      totalPrice
   });
 
   try {
@@ -26,12 +27,14 @@ export const createSession = async (req, res) => {
           email: userEmail,
           metadata: {
               userId,
+              userEmail,
               userName,
               binLevels: JSON.stringify(binLevels),  // Ensure binLevels is a string
               longitude,
               latitude,
               address,
-              overallPercentage
+              overallPercentage,
+              totalPrice
           }
       });
 
@@ -64,7 +67,7 @@ export const createSession = async (req, res) => {
 export const createOrUpdateBin = async (customer, session) => {
   try {
       // Metadata is in the customer object, not session
-      const { userId, userName, userEmail, binLevels, longitude, latitude, address, overallPercentage } = customer.metadata;
+      const { userId, userName, userEmail, binLevels, longitude, latitude, address, overallPercentage,totalPrice } = customer.metadata;
 
       console.log("Metadata retrieved from customer:", {
           userId,
@@ -74,7 +77,8 @@ export const createOrUpdateBin = async (customer, session) => {
           longitude,
           latitude,
           address,
-          overallPercentage
+          overallPercentage,
+          totalPrice
       });
 
       // Parse binLevels as it was stored as a JSON string
@@ -85,9 +89,11 @@ export const createOrUpdateBin = async (customer, session) => {
       if (bin) {
           // Update bin if it exists
           bin.longitude = longitude;
+          bin.userEmail = userEmail;
           bin.latitude = latitude;
           bin.address = address;
-          bin.binLevels = parsedBinLevels; // Use the parsed binLevels
+          bin.binLevels = parsedBinLevels; 
+          bin.totalPrice = totalPrice;
           bin.overallPercentage = overallPercentage;
           bin.isRequested = true;
       } else {
@@ -101,6 +107,7 @@ export const createOrUpdateBin = async (customer, session) => {
               address,
               binLevels: parsedBinLevels,
               overallPercentage,
+              totalPrice,
               isRequested: true,
           });
       }
