@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+
+import React, { useEffect, useState, useRef } from 'react'
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import AOS from 'aos';
@@ -10,6 +11,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { FaTrash, FaRecycle, FaUtensils, FaClipboardList, FaLeaf } from 'react-icons/fa'; 
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import QRCode from 'react-qr-code';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWR3eDIwMDEiLCJhIjoiY20yZTdvMG04MDJodjJrcHZ6YXdwYnFqcyJ9.7xBkMPBN3cuuiFQSeJOnbA';
 
@@ -24,7 +26,7 @@ export default function Home() {
   const markerRef = useRef(null);
   const navigate = useNavigate();
   const { currentUser , loading } = useSelector(state => state.user);
-
+  const [qrCodeData, setQrCodeData] = useState('');
   const maxCapacity = 100;
 
   const getInitialBinValue = (binType) => {
@@ -79,6 +81,14 @@ export default function Home() {
       },
     });
   };
+
+  useEffect(() => {
+    // Generate QR code data string when user info is available
+    if (currentUser && longitude && latitude && address) {
+      const qrData = `User: ${currentUser.username}, Email: ${currentUser.email}, Address: ${address}`;
+      setQrCodeData(qrData);
+    }
+  }, [currentUser, longitude, latitude, address]);
 
   useEffect(() => {
     AOS.init();
@@ -151,6 +161,30 @@ export default function Home() {
     setOverallPercentage(calculateOverallPercentage());
   }, [foodBin, plasticBin, paperBin]);
 
+
+  useEffect(() => {
+    const refreshBins = localStorage.getItem('refreshBins');
+    if (refreshBins === 'true') {
+      setFoodBin(0);
+      setPlasticBin(0);
+      setPaperBin(0);
+      localStorage.setItem('foodBin', 0);
+      localStorage.setItem('plasticBin', 0);
+      localStorage.setItem('paperBin', 0);
+      localStorage.removeItem('refreshBins'); 
+    }
+  }, []);
+
+   useEffect(() => {
+    if (location.state) {
+      const { qrCodeData, overallPercentage } = location.state;
+      setQrCodeData(qrCodeData);
+      setOverallPercentage(overallPercentage);
+    }
+  }, [location.state]);
+
+
+
   return (
     <div className="bg-green-50 min-h-screen flex flex-col items-center p-6">
       <h1 className="text-4xl font-bold text-center mb-6 text-green-800" data-aos="fade-up">Welcome to EcoWaste!</h1>
@@ -195,6 +229,11 @@ export default function Home() {
             </div>
             <p className="text-lg font-semibold">Keep it Green and Keep recycling and reducing waste to improve this percentage!</p>
 
+            <div className="mt-4 text-center" data-aos="fade-up" data-aos-delay="500">
+            
+           
+          </div>
+
             {/* Conditionally show the "Collect Waste" button when the overall percentage exceeds 75% */}
             {overallPercentage > 75 && (
               <button className="mt-4 bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-all" onClick={goToForm}>
@@ -209,14 +248,14 @@ export default function Home() {
             <div className="bg-green-100 p-4 rounded-lg shadow-md text-center" data-aos="fade-right">
               <h2 className="text-xl font-bold">Food Bin</h2>
               <FaUtensils className="text-green-600 text-4xl my-2" />
-              <p className="text-lg font-semibold">{foodBin} / {maxCapacity} kg</p>
+              <p className="text-lg font-semibold">{foodBin} / {maxCapacity}</p>
               <div className="w-24 h-24 mx-auto mt-4">
                 <CircularProgressbar
                   value={getPercentage(foodBin)}
                   text={`${getPercentage(foodBin)}%`}
                   styles={buildStyles({
                     textSize: '16px',
-                    pathColor: overallPercentage <= 50 ? 'green' : overallPercentage <= 75 ? 'blue' : 'red',
+                    pathColor: foodBin <= 50 ? 'green' : foodBin <= 75 ? 'blue' : 'red',
                     textColor: 'black',
                     trailColor: '#f0f0f0',
                   })}
@@ -236,14 +275,14 @@ export default function Home() {
             <div className="bg-yellow-100 p-4 rounded-lg shadow-md text-center" data-aos="fade-up">
               <h2 className="text-xl font-bold">Plastic Bin</h2>
               <FaRecycle className="text-yellow-600 text-4xl my-2" />
-              <p className="text-lg font-semibold">{plasticBin} / {maxCapacity} kg</p>
+              <p className="text-lg font-semibold">{plasticBin} / {maxCapacity}</p>
               <div className="w-24 h-24 mx-auto mt-4">
                 <CircularProgressbar
                   value={getPercentage(plasticBin)}
                   text={`${getPercentage(plasticBin)}%`}
                   styles={buildStyles({
                     textSize: '16px',
-                    pathColor: overallPercentage <= 50 ? 'green' : overallPercentage <= 75 ? 'blue' : 'red',
+                    pathColor: plasticBin <= 50 ? 'green' : plasticBin <= 75 ? 'blue' : 'red',
                     textColor: 'black',
                     trailColor: '#f0f0f0',
                   })}
@@ -263,14 +302,14 @@ export default function Home() {
             <div className="bg-blue-100 p-4 rounded-lg shadow-md text-center" data-aos="fade-left">
               <h2 className="text-xl font-bold">Paper Bin</h2>
               <FaClipboardList className="text-blue-600 text-4xl my-2" />
-              <p className="text-lg font-semibold">{paperBin} / {maxCapacity} kg</p>
+              <p className="text-lg font-semibold">{paperBin} / {maxCapacity} </p>
               <div className="w-24 h-24 mx-auto mt-4">
                 <CircularProgressbar
                   value={getPercentage(paperBin)}
                   text={`${getPercentage(paperBin)}%`}
                   styles={buildStyles({
                     textSize: '16px',
-                    pathColor: overallPercentage <= 50 ? 'green' : overallPercentage <= 75 ? 'blue' : 'red',
+                    pathColor: paperBin <= 50 ? 'green' : paperBin <= 75 ? 'blue' : 'red',
                     textColor: 'black',
                     trailColor: '#f0f0f0',
                   })}
@@ -288,6 +327,16 @@ export default function Home() {
           </div>
         </div>
       )}
+
+{       qrCodeData && (
+            <div className="mt-4"  data-aos="fade-up" data-aos-delay="400">
+              <h3 className="text-xl font-bold text-center">Your QR Code</h3>
+              <QRCode value={qrCodeData} />
+              <p className="text-center text-gray-600 mt-2">Scan to view your info.</p>
+            </div>
+          )}
     </div>
+
+    
   );
 }
