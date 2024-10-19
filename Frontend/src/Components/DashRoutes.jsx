@@ -1,85 +1,195 @@
-import { Table, Alert } from 'flowbite-react';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Button, Table } from 'flowbite-react';
+import { format } from 'date-fns';
+import mapboxgl from 'mapbox-gl';
 import { Link } from 'react-router-dom';
 
-export default function DashRoutes() {
-  const [bins, setBins] = useState([]);
+// Mapbox access token
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWR3eDIwMDEiLCJhIjoiY20yZTdvMG04MDJodjJrcHZ6YXdwYnFqcyJ9.7xBkMPBN3cuuiFQSeJOnbA';
+
+export default function DashRequest() {
+  const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [map, setMap] = useState(null);
 
   useEffect(() => {
-    const fetchBins = async () => {
+    const fetchRequests = async () => {
       try {
-        const res = await fetch(`/api/bin/get-all-bins`);
+        const res = await fetch('/api/bin/getbins');
         const data = await res.json();
-        if (!res.ok) {
-          setError(data.message || 'Failed to fetch bins');
-          return;
+        if (res.ok) {
+          setRequests(data.bins);
+          console.log('Fetched bin locations:', data.bins);
         }
-        setBins(data);
       } catch (error) {
-        console.error('Error fetching bins:', error);
-        setError('Error occurred while fetching bins');
+        console.error('Error fetching requests:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchBins();
+    fetchRequests();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    if (!map && requests.length > 0) {
+      const initializeMap = () => {
+        // Check if the geolocation API is available
+        if ('geolocation' in navigator) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const { latitude, longitude } = position.coords;
+
+              // Initialize the Mapbox map with the user's location as the center
+              const mapInstance = new mapboxgl.Map({
+                container: 'map', // Container ID
+                style: 'mapbox://styles/mapbox/streets-v11', // Map style
+                center: [longitude, latitude], // Initial map center (user's location)
+                zoom: 12, // Initial zoom level
+              });
+
+              // Add user's current location as a blue marker
+              new mapboxgl.Marker({ color: '#007bff' }) // Blue color for the marker
+                .setLngLat([longitude, latitude])
+                .setPopup(new mapboxgl.Popup().setText('Your Location'))
+                .addTo(mapInstance);
+
+              // Loop through each request and add a red marker for each bin location
+              requests.forEach((request, index) => {
+                if (request.longitude && request.latitude) {
+                  console.log(`Adding marker for bin ${index + 1} at [${request.longitude}, ${request.latitude}]`);
+
+                  new mapboxgl.Marker({ color: 'red' })
+                    .setLngLat([request.longitude, request.latitude])
+                    .setPopup(new mapboxgl.Popup().setText(`Bin at ${request.address}`))
+                    .addTo(mapInstance);
+
+                  // Fetch and draw the route from user's location to the bin location
+                  fetchRoute([longitude, latitude], [request.longitude, request.latitude], mapInstance, index);
+                } else {
+                  console.error(`Bin ${index + 1} has invalid coordinates:`, request);
+                }
+              });
+
+              // Set the map instance
+              setMap(mapInstance);
+            },
+            (error) => {
+              console.error('Error getting current location:', error);
+              alert('Unable to retrieve your location. Please ensure location services are enabled.');
+            }
+          );
+        } else {
+          alert('Geolocation is not supported by your browser.');
+        }
+      };
+
+      const fetchRoute = async (start, end, mapInstance, index) => {
+        try {
+          const response = await fetch(
+            `https://api.mapbox.com/directions/v5/mapbox/driving/${start[0]},${start[1]};${end[0]},${end[1]}?geometries=geojson&access_token=${mapboxgl.accessToken}`
+          );
+          const routeData = await response.json();
+
+          if (routeData.routes.length > 0) {
+            const route = routeData.routes[0].geometry;
+
+            // Create a unique layer ID for each route based on the index
+            const layerId = `route-${index}`;
+            if (mapInstance.getLayer(layerId)) {
+              mapInstance.removeLayer(layerId);
+              mapInstance.removeSource(layerId);
+            }
+
+            // Add the route as a layer to the map
+            mapInstance.addLayer({
+              id: layerId,
+              type: 'line',
+              source: {
+                type: 'geojson',
+                data: {
+                  type: 'Feature',
+                  properties: {},
+                  geometry: route,
+                },
+              },
+              layout: {
+                'line-join': 'round',
+                'line-cap': 'round',
+              },
+              paint: {
+                'line-color': '#1DB954', // Route color
+                'line-width': 4,
+              },
+            });
+          }
+        } catch (error) {
+          console.error('Error fetching route:', error);
+        }
+      };
+
+      initializeMap();
+    }
+  }, [map, requests]);
 
   return (
     <div className="p-4">
-      <div className='flex flex-wrap gap-3 pt-5 pl-5 pb-4'>
-            <Link to='/addtruck'>
-                <button className='p-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>Add Truck</button>
-            </Link>
-            <Link to='/dashboard?tab=trucks'>
-                <button className='p-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>Available Trucks</button>
-            </Link>
-            <Link to='/dashboard?tab=bindetails'>
-                <button className='p-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>Bin Details</button>
-            </Link>
+      <div className="w-full max-w-5xl mx-auto">
+        <h1 className="text-xl font-bold mb-4 text-left">Collection Requests</h1>
+        <div id="map" className="w-full h-[60vh] mb-6 rounded-lg shadow-md mx-auto"></div>
 
-        </div>
-      <h2 className="text-xl font-semibold mb-4">All Bin Locations</h2>
-
-      {error ? (
-        <Alert color="failure" className="my-4">{error}</Alert>
-      ) : (
-        <div className="p-4 bg-white shadow-md rounded-lg">
-          {bins.length > 0 ? (
-            <Table hoverable={true}>
+        {loading ? (
+          <p className="text-center">Loading requests...</p>
+        ) : requests.length > 0 ? (
+          <div className="overflow-x-auto">
+            <Table hoverable className="shadow-md w-full">
               <Table.Head>
-                <Table.HeadCell>Bin ID</Table.HeadCell>
+                <Table.HeadCell>Created At</Table.HeadCell>
                 <Table.HeadCell>User Name</Table.HeadCell>
                 <Table.HeadCell>Address</Table.HeadCell>
-                <Table.HeadCell>Longitude</Table.HeadCell>
-                <Table.HeadCell>Latitude</Table.HeadCell>
+                <Table.HeadCell>Bin Levels</Table.HeadCell>
                 <Table.HeadCell>Overall Percentage</Table.HeadCell>
+                <Table.HeadCell>Actions</Table.HeadCell>
+                <Table.HeadCell>Assign Route</Table.HeadCell>
               </Table.Head>
               <Table.Body className="divide-y">
-                {bins.map((bin) => (
-                  <Table.Row key={bin._id} className="bg-white">
-                    <Table.Cell>{bin._id}</Table.Cell>
-                    <Table.Cell>{bin.userName}</Table.Cell>
-                    <Table.Cell>{bin.address}</Table.Cell>
-                    <Table.Cell>{bin.longitude}</Table.Cell>
-                    <Table.Cell>{bin.latitude}</Table.Cell>
-                    <Table.Cell>{bin.overallPercentage}%</Table.Cell>
+                {requests.map((request) => (
+                  <Table.Row key={request._id}>
+                    <Table.Cell>
+                      {format(new Date(request.createdAt), 'MMMM d, yyyy HH:mm')}
+                    </Table.Cell>
+                    <Table.Cell>{request.userName}</Table.Cell>
+                    <Table.Cell>{request.address}</Table.Cell>
+                    <Table.Cell>
+                      <div>Food Bin: {request.binLevels.foodBin}%</div>
+                      <div>Plastic Bin: {request.binLevels.plasticBin}%</div>
+                      <div>Paper Bin: {request.binLevels.paperBin}%</div>
+                    </Table.Cell>
+                    <Table.Cell>{request.overallPercentage}%</Table.Cell>
+                    <Table.Cell>
+                      {request.isRequested ? (
+                        <button className="text-red-500">Complete Request</button>
+                      ) : (
+                        <span className="text-green-500">Completed</span>
+                      )}
+                      
+                    </Table.Cell>
+                    <Table.Cell>
+                    <Link to={`/assign-route/${request._id}`}>
+                      <Button size="xs" color="success">
+                        Assign this Route
+                      </Button>
+                      </Link>
+                    </Table.Cell>
                   </Table.Row>
                 ))}
               </Table.Body>
             </Table>
-          ) : (
-            <p>No bins available yet.</p>
-          )}
-        </div>
-      )}
+          </div>
+        ) : (
+          <p className="text-center">No requests found.</p>
+        )}
+      </div>
     </div>
   );
 }

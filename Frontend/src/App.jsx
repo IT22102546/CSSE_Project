@@ -13,6 +13,7 @@ import UpdateTruck from './Pages/UpdateTruck';
 import SubmitIssue from './Pages/SubmitIssue';
 import UpdateCollectorIssue from './Pages/UpdateCollectorIssue';
 import CollectionRequestForm from './Pages/CollectionRequestForm';
+import AssignRoute from './Pages/AssignRoute';
 
 
 export default function App() {
@@ -47,7 +48,8 @@ export default function App() {
           <Route path="/submittIssue" element={<SubmitIssue/>}/>
           <Route path="/update-issue/:id" element={<UpdateCollectorIssue/>}/>
 
-          <Route path="/request" element={<CollectionRequestForm/>}/> 
+          <Route path="/request" element={<CollectionRequestForm/>}/>
+          <Route path="/assign-route/:id" element={<AssignRoute/>}/> 
 
 
         <Route/> 
