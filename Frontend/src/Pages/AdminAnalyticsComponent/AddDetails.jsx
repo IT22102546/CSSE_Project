@@ -124,14 +124,28 @@ export default function AddDetails() {
     <div className="add-pet-container">
       <h1 id='main-topic-form'>Add Garabage Details</h1>
       <form onSubmit={handleSubmit}>
-        <input
+        <select value={formData.type}   placeholder="Garbage Type" onChange={(e) => setFormData({ ...formData, type: e.target.value })}>
+          <option>Organic Waste</option>
+          <option>Plastic</option>
+          <option>Paper</option>
+          <option>Metal</option>
+          <option>Glass</option>
+          <option>Electronic Waste</option>
+          <option>Hazardous Waste</option>
+          <option>Textile Waste</option>
+          <option>Electronic Waste</option>
+          <option>Construction Debris</option>
+          <option>Medical Waste</option>
+        </select>
+        <br></br>
+        {/* <input
           type="text"
           placeholder="Garbage Type"
           value={formData.type}
           onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-        />
+        /> */}
         {formErrors.type && <p className="error">{formErrors.type}</p>}
-
+        <br></br>
         <input
           type="text"
           placeholder="Frequency"
@@ -140,30 +154,52 @@ export default function AddDetails() {
         />
         {formErrors.itemCode && <p className="error">{formErrors.itemCode}</p>}
         
-        <input
+
+        <select value={formData.disposal_method}  placeholder="Disposal Method" onChange={(e) => setFormData({ ...formData, disposal_method: e.target.value })} >
+          <option>Recycling</option>
+          <option>Composting</option>
+          <option>Landfill</option>
+          <option>Incineration</option>
+          <option>Glass</option>
+          <option>Reuse</option>
+          <option>Special Disposal (for hazardous or medical waste)</option>
+         
+        </select>
+        {/* <input
           type="text"
           placeholder="Disposal Method"
           value={formData.disposal_method}
           onChange={(e) => setFormData({ ...formData, disposal_method: e.target.value })}
-        />
+        /> */}
         {formErrors.disposal_method && <p className="error">{formErrors.disposal_method}</p>}
 
         <input
           type="text"
-          placeholder="Quantity"
+          placeholder="Quantity of Kilograms (kg) ,Tons, Liters, Cubic Meters, Bags"
           value={formData.quentity}
           onChange={(e) => setFormData({ ...formData, quentity: e.target.value })}
         />
         {formErrors.quentity && <p className="error">{formErrors.quentity}</p>}
 
-        <input
+        <select      placeholder="Area"   value={formData.area}   onChange={(e) => setFormData({ ...formData, area: e.target.value })}
+ >
+          <option>Residential</option>
+          <option>Commercial</option>
+          <option>Industrial</option>
+          <option>Public Spaces</option>
+          <option>Construction Site</option>
+          <option>Medical Facility</option>
+          <option>Educational Institution</option>
+         
+        </select>
+        {/* <input
           type="text"
           placeholder="Area"
           value={formData.area}
           onChange={(e) => setFormData({ ...formData, area: e.target.value })}
-        />
+        /> */}
         {formErrors.area && <p className="error">{formErrors.area}</p>}
-
+<br></br>
         <div>
           <button className="upload-button"  onClick={handleImage1Click}>
             Upload Picture
@@ -183,6 +219,7 @@ export default function AddDetails() {
             src={formData.profilePicture || 'https://media.istockphoto.com/id/1294866141/vector/picture-reload.jpg?s=612x612&w=is&k=20&c=Ei6q4n6VkP3B0R30d1VdZ4i11CFbyaEoAFy6_WEbArE='}
             alt="Profile"
             onClick={handleImage1Click}
+            className='img'
           />
         </div>
 

@@ -188,6 +188,26 @@ button {
 button:hover {
   background-color: #2980b9;
 }
+.highest-quantity-info {
+  margin-top: 20px;
+  text-align: center;
+  color:rgb(218, 46, 12);
+  font-weight: bold;
+}
+.highest-quantity-info p{
+  margin-top: 5px;
+  text-align: center;
+  color:rgb(12, 103, 239);
+  font-weight: bold;
+}
+
+.highest-quantity-img {
+  width: 7%;
+  height: auto;
+  margin-left: 46%;
+  border-radius: 10px;
+  margin-top: 10px;
+}
 
 /* Specific style for report download button */
 #report-btn {

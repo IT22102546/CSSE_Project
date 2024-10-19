@@ -14,15 +14,39 @@
     margin-bottom: 5px;
     color: #333;
   }
-  .update-btn{
-    cursor: pointer;
-    background-color: #0ecc3d;
+  #btn-update {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text */
+    padding: 12px 20px; /* Padding around the button */
+    border: none; /* Remove border */
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+  }
+  
+  #btn-update:hover {
+    background-color: #45a049; /* Darker green on hover */
+    transform: translateY(-2px); /* Slight lift effect on hover */
+  }
+  
+  #btn-update:disabled {
+    background-color: #9E9E9E; /* Grey background when disabled */
+    cursor: not-allowed; /* Not-allowed cursor for disabled button */
+    box-shadow: none; /* Remove shadow when disabled */
+  }
+  
+  .btn-update{
+    
+    background-color: #087222;
     color: white;
     font-weight: bold;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+   
   }
   
   .service-update input[type="text"] {

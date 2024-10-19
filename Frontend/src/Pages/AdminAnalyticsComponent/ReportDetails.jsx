@@ -12,8 +12,7 @@ function AnalyticalRepoart() {
     const componentPDF = useRef();
     const [countlist, setcountlist] = useState([]);
     const [customerlist, setcustomerlist] = useState([]);
-
-   
+    const [highestQuantityItem, setHighestQuantityItem] = useState(null); // State for the item with the highest quantity
 
     // Fetch data
     const getfetchdata = async () => {
@@ -22,6 +21,12 @@ function AnalyticalRepoart() {
             const { count } = data.data;
             setcountlist(count);
             setcustomerlist(data.data.data);
+
+            // Find the item with the highest quantity
+            const highestItem = data.data.data.reduce((prev, current) => {
+                return prev.quentity > current.quentity ? prev : current;
+            }, {});
+            setHighestQuantityItem(highestItem); // Set the highest quantity item
         } catch (err) {
             alert(err);
         }
@@ -109,6 +114,22 @@ function AnalyticalRepoart() {
                     </div>
                 </div>
 
+                {/* Display highest quantity item info below the bar graph */}
+                {highestQuantityItem && (
+                    <div className='highest-quantity-info'>
+                        <h4>Item with Highest Quantity</h4>
+                        <p>Type: {highestQuantityItem.type}</p>
+                        <p>Area: {highestQuantityItem.area}</p>
+                        {highestQuantityItem.profilePicture && (
+                            <img 
+                                src={highestQuantityItem.profilePicture} 
+                                alt="Profile" 
+                                className="highest-quantity-img"
+                            />
+                        )}
+                    </div>
+                )}
+
                 {/* Table */}
                 <table>
                     <thead>
@@ -131,8 +152,6 @@ function AnalyticalRepoart() {
                     </tbody>
                 </table>
             </div>
-
-            
         </div>
     );
 }

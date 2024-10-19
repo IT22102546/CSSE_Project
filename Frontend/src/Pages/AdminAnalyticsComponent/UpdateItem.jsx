@@ -147,13 +147,27 @@ function UpdateItem() {
 
   return (
     <div className="service-update">
-      <input
+      <select  value={updatediscount.type}  name="type"    onChange={handleInputChange}>
+      <option>Organic Waste</option>
+          <option>Plastic</option>
+          <option>Paper</option>
+          <option>Metal</option>
+          <option>Glass</option>
+          <option>Electronic Waste</option>
+          <option>Hazardous Waste</option>
+          <option>Textile Waste</option>
+          <option>Electronic Waste</option>
+          <option>Construction Debris</option>
+          <option>Medical Waste</option>
+         
+        </select>
+      {/* <input
         type="text"
         placeholder="Garbage Type"
         name="type"
         onChange={handleInputChange}
         value={updatediscount.type}
-      />
+      /> */}
       {formErrors.type && <p className="error">{formErrors.type}</p>}
 
       <input
@@ -172,26 +186,46 @@ function UpdateItem() {
         onChange={handleInputChange}
         value={updatediscount.quentity}
       />
+      <br></br>
       {formErrors.quentity && <p className="error">{formErrors.quentity}</p>}
-
-      <input
+      <select  onChange={handleInputChange}  name="disposal_method" >
+          <option>Recycling</option>
+          <option>Composting</option>
+          <option>Landfill</option>
+          <option>Incineration</option>
+          <option>Glass</option>
+          <option>Reuse</option>
+          <option>Special Disposal (for hazardous or medical waste)</option>
+         
+        </select>
+      {/* <input
        type="text"
        placeholder="Disposal Method"
        name="disposal_method"
       onChange={handleInputChange}
       value={updatediscount.disposal_method}
-      />
+      /> */}
       {formErrors.disposal_method && <p className="error">{formErrors.disposal_method}</p>}
-
-      <input
+<br></br><br></br>
+      <select  value={updatediscount.area}  name="area"   onChange={handleInputChange}>
+          <option>Residential</option>
+          <option>Commercial</option>
+          <option>Industrial</option>
+          <option>Public Spaces</option>
+          <option>Construction Site</option>
+          <option>Medical Facility</option>
+          <option>Educational Institution</option>
+         
+        </select>
+      {/* <input
           type="text"
           placeholder="Area"
           name="area"
         onChange={handleInputChange}
         value={updatediscount.area}
-      />
+      /> */}
       {formErrors.area && <p className="error">{formErrors.area}</p>}
-
+      <br></br><br></br>
       
       <div className="flex justify-center items-center gap-4">
         <button
@@ -225,7 +259,7 @@ function UpdateItem() {
 
       <button
         type="submit"
-        className="btn-update"
+        id="btn-update"
         onClick={handleUpdate}
         disabled={isSubmitting}
       >

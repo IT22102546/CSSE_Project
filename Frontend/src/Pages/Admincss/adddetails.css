@@ -1,4 +1,4 @@
-/* adddetails.css */
+/* AddDetails Component CSS */
 .add-pet-container {
   display: flex;
   flex-direction: column;
@@ -12,6 +12,7 @@
   margin: auto;
   margin-top: 5%;
 }
+
 #main-topic-form {
   font-size: 2rem;
   color: #2c3e50;
@@ -42,30 +43,53 @@ form {
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding-bottom: 10%;
 }
 
-input[type="text"] {
+input[type="text"],
+select {
   padding: 12px 15px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
+  margin-top: 25px;
   border: 2px solid #ccc;
   border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s ease;
+  background: #f5f5f5;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus,
+select:focus {
   border-color: #4a90e2;
   outline: none;
+  background: #fff;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url('https://cdn-icons-png.flaticon.com/512/2985/2985150.png') no-repeat right 10px center;
+  background-size: 18px;
+  padding-right: 40px;
+  cursor: pointer;
+}
+
+select:hover {
+  background-color: #eef7ff;
+  border-color: #357ABD;
 }
 
 .upload-button {
-  background: linear-gradient(135deg,#377f81, #5c8bdd);
+  background: linear-gradient(135deg, #377f81, #5c8bdd);
   color: white;
   padding: 10px;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
+  margin-top: 20px;
   margin-bottom: 10px;
   transition: background-color 0.3s ease;
 }
@@ -75,13 +99,12 @@ input[type="text"]:focus {
 }
 
 #submit-button-additem {
-
   color: rgb(8, 8, 8);
   padding: 12px;
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
-  background: linear-gradient(135deg,#75cfd0, #cadb74);
+  background: linear-gradient(135deg, #75cfd0, #cadb74);
   margin-top: 10px;
   transition: background-color 0.3s ease;
 }
@@ -103,12 +126,12 @@ input[type="text"]:focus {
   background-color: #5a6268;
 }
 
-img {
+.img {
   margin-top: 20px;
-  height: 150px;
-  width: 150px;
+  height: 30%;
+  width: 30%;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 20%;
   cursor: pointer;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -124,4 +147,35 @@ img {
   font-size: 0.9rem;
   margin-top: -10px;
   margin-bottom: 10px;
+}
+
+/* Dropdown styles */
+select {
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 2px solid #ccc;
+  font-size: 1rem;
+  background-color: #f5f5f5;
+  color: #333;
+  transition: border-color 0.3s ease;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+select:focus {
+  border-color: #4a90e2;
+  outline: none;
+}
+
+select:hover {
+  border-color: #357ABD;
+  background-color: #eef7ff;
+}
+
+select {
+  appearance: none;
+  background: url('https://cdn-icons-png.flaticon.com/512/2985/2985150.png') no-repeat right 12px center;
+  background-size: 18px;
+  padding-right: 40px;
+  cursor: pointer;
 }
