@@ -1,17 +1,7 @@
 import mongoose from "mongoose";
 
 const itemSchema = new mongoose.Schema({
-    petId: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true
-    },
-    userId: {
-        type: String,
-        required: true,
-        trim: true
-    },
+ 
     type: {
         type: String,
         required: true,
@@ -47,6 +37,6 @@ const itemSchema = new mongoose.Schema({
   
 }, { timestamps: true });
 
-const Item = mongoose.model("Admin_Details", itemSchema);
+const Item = mongoose.model("Item_Details", itemSchema);
 
 export default Item;

@@ -10,11 +10,11 @@ import { useReactToPrint } from 'react-to-print';
 
 export default function ItemProfile() {
   const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
-  const { currentUser } = useSelector((state) => state.user);
+ 
   const [orders, setOrders] = useState([]);
   const [orderIdToDelete, setOrderIdToDelete] = useState('');
   const [showModal, setShowModal] = useState(false);
-  const componentPDF = useRef(); // Add reference for PDF generation
+  // Add reference for PDF generation
 
   useEffect(() => {
     fetchOrders();
@@ -22,7 +22,7 @@ export default function ItemProfile() {
 
   const fetchOrders = async () => {
     try {
-      const response = await fetch(`/api/adminauth/user/${currentUser._id}`);
+      const response = await fetch(`/api/adminauth/users/items`);
       if (!response.ok) {
         throw new Error('Failed to fetch orders');
       }
@@ -63,7 +63,7 @@ export default function ItemProfile() {
 
   const handleDeleteOrder = async () => {
     try {
-      const res = await fetch(`/api/user/deleteitem/${orderIdToDelete}`, {
+      const res = await fetch(`/api/adminuser/deleteitem/${orderIdToDelete}`, {
         method: 'DELETE',
       });
       const data = await res.json();
@@ -81,26 +81,14 @@ export default function ItemProfile() {
     }
   };
 
-  const generatePDF = useReactToPrint({
-    content: () => componentPDF.current,
-    documentTitle: 'Total Item Report',
-    onBeforeGetContent: () => {
-      setIsGeneratingPDF(true);
-      return Promise.resolve();
-    },
-    onAfterPrint: () => {
-      setIsGeneratingPDF(false);
-      alert('Data saved in PDF');
-    }
-  });
 
   return (
     <div className="table-auto">
       <h2 className="my-8 text-center font-bold text-4xl text-gray-800">Item Information</h2>
 
-      <div ref={componentPDF} style={{ width: '100%' }}>
+      {/* <div ref={componentPDF} style={{ width: '100%' }}> */}
         {orders.length > 0 ? (
-          <Table hoverable className="shadow-md">
+          <Table id='item-info-table' hoverable className="shadow-md">
             <Table.Head>
               <Table.HeadCell>Garbage Type</Table.HeadCell>
               <Table.HeadCell>Frequency</Table.HeadCell>
@@ -150,9 +138,9 @@ export default function ItemProfile() {
         ) : (
           <p>You have no orders yet!</p>
         )}
-      </div>
+     
 <br></br>
-      <button id='genratebtn' onClick={generatePDF} disabled={isGeneratingPDF}>
+      <button id='genratebtn' >
         {isGeneratingPDF ? 'Generating PDF...' : 'Generate Report'}
       </button>
 

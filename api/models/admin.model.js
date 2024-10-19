@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const userSchema =new mongoose.Schema({
+const adminSchema =new mongoose.Schema({
     username:{
         type:String,
         required:true,
@@ -16,12 +16,19 @@ const userSchema =new mongoose.Schema({
         required:true,
      
     },
-    profilePicture:{
+    address:{
         type:String,
-        default:'https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg',
-    }
+        required:true,
+        unique:true
+    },
+    phone:{
+        type:String,
+        required:true,
+     
+    },
+    
 },{timestamps:true});
 
-const Admin=mongoose.model("Admin",userSchema)
+const Admin=mongoose.model("Admin",adminSchema)
 
 export default Admin;

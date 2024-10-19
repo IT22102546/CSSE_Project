@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { app } from '../../firebase';
 import { useSelector } from 'react-redux';
@@ -14,10 +14,10 @@ export default function AddDetails() {
   const [error, setError] = useState('');
   const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
-  const { currentUser } = useSelector((state) => state.user);
+
 
   const [formData, setFormData] = useState({
-    userId: currentUser._id,
+   
     type: '',
     freequency: '',
     disposal_method: '',
@@ -69,10 +69,10 @@ export default function AddDetails() {
     const errors = {};
 
     if (!formData.type.trim()) {
-      errors.type = 'Order ID is required';
+      errors.type = 'Type is required';
     }
     if (!formData.freequency.trim()) {
-      errors.freequency = 'Item Code is required';
+      errors.freequency = 'freequency Code is required';
     }
     if (!formData.quentity || isNaN(formData.quentity) || formData.quentity <= 0) {
       errors.quentity = 'Quantity must be a positive integer';
@@ -122,7 +122,7 @@ export default function AddDetails() {
 
   return (
     <div className="add-pet-container">
-      <h1>Add Item</h1>
+      <h1 id='main-topic-form'>Add Garabage Details</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -165,7 +165,7 @@ export default function AddDetails() {
         {formErrors.area && <p className="error">{formErrors.area}</p>}
 
         <div>
-          <button className="upload-button" type="button" onClick={handleImage1Click}>
+          <button className="upload-button"  onClick={handleImage1Click}>
             Upload Picture
           </button>
           <input
@@ -188,9 +188,12 @@ export default function AddDetails() {
 
         <p className="upload-progress">Image Uploading: {imagePercent}%</p>
 
-        <button className="submit-button" type="submit">
+        <button id="submit-button-additem" >
           Submit
         </button>
+        <Link to='/items' className='my-items-button'>
+        View  Garbage Details
+        </Link>
         {error && <p className="error">{error}</p>}
       </form>
  

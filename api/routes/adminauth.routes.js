@@ -1,18 +1,15 @@
 import express from 'express'
-import { signin, signup,google,signout,store,getOrdersByCustomerId,allitems,google1,itemCount } from '../controllers/Adminauth.controller.js';
+import { admin_signin, admin_signup,admin_details,store,allitems,itemCount } from '../controllers/Adminauth.controller.js';
 
 
 const router=express.Router();
 
-router.post("/signup",signup)//register
-router.post("/signin",signin)//login
-router.post("/google",google)
-router.post("/google1",google1)
-router.get('/signout',signout)
-
+router.get("/admin_details",admin_details)
+router.post("/admin_signup",admin_signup)//register
+router.post("/admin_signin",admin_signin)//login
 
 router.post("/store",store)
-router.get("/user/:id",getOrdersByCustomerId)//for data fetch user id
+// router.get("/user/:id",getOrdersByCustomerId)//for data fetch user id
 router.get("/users/items",allitems)
 router.get("/itemCount",itemCount)
 export default router
