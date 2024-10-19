@@ -6,6 +6,7 @@ import cors from "cors";
 import authRoute from "./routes/auth.route.js"
 import userRoute from "./routes/user.route.js"
 import truckRoute from "./routes/truck.route.js";
+import issueRoure from "./routes/issue.route.js"
 
 dotenv.config();
 
@@ -32,6 +33,7 @@ app.use(cors(corsOptions));
 app.use("/api/auth",authRoute);
 app.use("/api/user",userRoute); 
 app.use("/api/truck", truckRoute);
+app.use("/api/issue", issueRoure);
 
 app.use((err,req,res,next)=>{
     const statusCode = err.statusCode || 500;

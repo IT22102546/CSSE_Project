@@ -10,6 +10,8 @@ import PrivateRoute from './Components/PrivateRoute';
 import DashBoard from './Pages/DashBoard';
 import AddTruckForm from './Pages/AddTruckForm';
 import UpdateTruck from './Pages/UpdateTruck';
+import SubmitIssue from './Pages/SubmitIssue';
+import UpdateCollectorIssue from './Pages/UpdateCollectorIssue';
 
 export default function App() {
   return (
@@ -26,6 +28,8 @@ export default function App() {
           <Route path="/dashboard" element={<DashBoard/>}/> 
           <Route path="/addtruck" element={<AddTruckForm/>}/>
           <Route path="/update-truck/:id" element={<UpdateTruck/>}/>
+          <Route path="/submittIssue" element={<SubmitIssue/>}/>
+          <Route path="/update-issue/:id" element={<UpdateCollectorIssue/>}/>
         <Route/> 
       </Routes>
     </BrowserRouter>
