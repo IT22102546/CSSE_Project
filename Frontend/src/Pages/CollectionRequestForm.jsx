@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWR3eDIwMDEiLCJhIjoiY20yZTdvMG04MDJodjJrcHZ6YXdwYnFqcyJ9.7xBkMPBN3cuuiFQSeJOnbA';
 
@@ -21,11 +21,9 @@ export default function CollectionRequestForm() {
   const mapContainerRef = useRef(null);
   const mapInstance = useRef(null);
   const markerRef = useRef(null);
-
   const navigate = useNavigate();
-  const location = useLocation(); // To receive state passed from Home page
+  const location = useLocation();
 
-  // Initialize form with user data from Home
   useEffect(() => {
     if (location.state) {
       const { userId, userName, userEmail, longitude, latitude, address, foodBin, plasticBin, paperBin, overallPercentage } = location.state;
@@ -39,7 +37,6 @@ export default function CollectionRequestForm() {
       setOverallPercentage(overallPercentage);
     }
 
-    // Initialize map if longitude and latitude are available
     if (longitude && latitude) {
       if (mapContainerRef.current && !mapInstance.current) {
         mapInstance.current = new mapboxgl.Map({
@@ -61,25 +58,23 @@ export default function CollectionRequestForm() {
           .setLngLat([longitude, latitude])
           .addTo(mapInstance.current);
 
-        // Update location when the marker is dragged
         markerRef.current.on('dragend', () => {
           const lngLat = markerRef.current.getLngLat();
           setLongitude(lngLat.lng);
           setLatitude(lngLat.lat);
-          reverseGeocode(lngLat.lng, lngLat.lat); // Call reverse geocoding to update address
+          reverseGeocode(lngLat.lng, lngLat.lat); // Update the address based on dragged location
         });
       }
     }
   }, [longitude, latitude, location.state]);
 
-  // Reverse geocode to get address
   const reverseGeocode = (lng, lat) => {
     const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${lng},${lat}.json?access_token=${mapboxgl.accessToken}`;
     fetch(url)
       .then(response => response.json())
       .then(data => {
         if (data.features && data.features.length > 0) {
-          setAddress(data.features[0].place_name); // Set the first result as the address
+          setAddress(data.features[0].place_name);
         } else {
           setAddress('Unknown location');
         }
@@ -87,15 +82,17 @@ export default function CollectionRequestForm() {
       .catch(err => console.error('Error with reverse geocoding:', err));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      const response = await fetch('/api/bin/createbin', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+
+    console.log('Longitude:', longitude);
+    console.log('Latitude:', latitude);
+    console.log('Address:', address);
+
+    if (longitude && latitude && address) {
+      // Navigate to Order Summary page, passing all the necessary state
+      navigate('/order-summary', {
+        state: {
           userId,
           userName,
           userEmail,
@@ -103,17 +100,13 @@ export default function CollectionRequestForm() {
           latitude,
           address,
           binLevels,
-          overallPercentage,
-        }),
+          overallPercentage
+        }
       });
-      const data = await response.json();
-      console.log('Request saved:', data);
-      navigate('/request-confirmation');
-    } catch (error) {
-      console.error('Error submitting request:', error);
+    } else {
+      console.error('Location data is incomplete.');
     }
   };
-  
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-lg max-w-4xl mx-auto mt-8">
@@ -189,7 +182,7 @@ export default function CollectionRequestForm() {
           type="submit"
           className="mt-4 w-full bg-green-600 text-white py-2 rounded-lg shadow-lg hover:bg-green-700 transition-all"
         >
-          Submit Collection Request
+          Go to Order Summary
         </button>
       </form>
     </div>
