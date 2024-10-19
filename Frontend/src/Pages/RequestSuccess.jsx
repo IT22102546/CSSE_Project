@@ -8,7 +8,7 @@ export default function RequestSuccess() {
   const navigate = useNavigate(); 
 
   useEffect(() => {
-    AOS.init(); // Initialize AOS
+    AOS.init(); 
   }, []);
 
   return (
