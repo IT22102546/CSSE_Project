@@ -140,6 +140,7 @@ export default function CollectionMap() {
     }
   };
 
+  
   //console.log(route.binId);
   const resetBinLevel = async (binId) => {
     try {
