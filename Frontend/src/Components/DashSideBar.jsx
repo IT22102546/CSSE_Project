@@ -1,6 +1,6 @@
 import { Sidebar } from "flowbite-react";
 import { useEffect, useState } from "react";
-import { HiArchive, HiArrowSmRight, HiGift, HiLink, HiOutlineArrowsExpand, HiOutlineCollection, HiOutlineDocument, HiOutlineFolder, HiOutlineQuestionMarkCircle, HiOutlineTerminal, HiOutlineUserGroup, HiQuestionMarkCircle, HiUser} from 'react-icons/hi';
+import { HiArchive, HiArrowSmRight, HiEmojiHappy, HiGift, HiLink, HiOutlineArrowsExpand, HiOutlineCollection, HiOutlineDocument, HiOutlineFolder, HiOutlineQuestionMarkCircle, HiOutlineTerminal, HiOutlineUserGroup, HiQuestionMarkCircle, HiUser} from 'react-icons/hi';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { signOut } from "../redux/user/userSlice";
@@ -48,6 +48,16 @@ export default function DashSideBar() {
               Profile
             </Sidebar.Item>
           </Link>
+
+          <Link to='/dashboard?tab=myrequest' key="myrequest">
+                <Sidebar.Item
+                  active={tab === 'myrequest'}
+                  icon={HiEmojiHappy}
+                  as='div'
+                >
+                  My Requests
+                </Sidebar.Item>
+            </Link>
 
           {currentUser?.isAdmin && (
             <>

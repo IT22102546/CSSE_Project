@@ -71,20 +71,20 @@ export default function Header() {
               Home
             </NavLink>
             <NavLink
-              to="/category"
+              to="/about"
               className={({ isActive }) =>
                 isActive ? "text-black" : "text-white"
               }
             >
-              Categories
+              About Us
             </NavLink>
             <NavLink
-              to="/product-page"
+              to="/contact"
               className={({ isActive }) =>
                 isActive ? "text-black" : "text-white"
               }
             >
-              Products
+              Contact Us
             </NavLink>
             <NavLink
               to="/blogs"
@@ -94,18 +94,12 @@ export default function Header() {
             >
               Blogs
             </NavLink>
-           
+
           </div>
         </div>
 
         <div className="hidden md:flex space-x-8 items-center">
-          {currentUser && (
-            <Link to="/cart">
-              <div className="flex relative">
-                <HiShoppingBag className="mr-1" style={{ fontSize: "24px" }} />
-              </div>
-            </Link>
-          )}
+          
 
           {currentUser ? (
             <Dropdown

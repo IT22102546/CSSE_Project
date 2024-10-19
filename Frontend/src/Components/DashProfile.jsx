@@ -235,18 +235,7 @@ export default function DashProfile() {
         >
           {loading ? 'Loading..' : 'Update Account'}
         </Button>
-        {currentUser.isAdmin && (
-          <Link to='/addproduct'>
-            <Button
-              type='button'
-               gradientDuoTone='purpleToBlue'
-              className='w-full , text-black bg-slate-400 '
-              outline
-            >
-              Add products
-            </Button>
-          </Link>
-        )}   
+         
 
       </form>
       <div className='text-red-500 flex justify-between mt-5'>

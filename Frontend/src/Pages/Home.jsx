@@ -8,7 +8,7 @@ import location from '../assets/images/location.png';
 import trashIcon from '../assets/images/trashbg.png';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { FaTrash, FaRecycle, FaUtensils, FaClipboardList, FaLeaf } from 'react-icons/fa'; 
+import { FaTrash, FaRecycle, FaUtensils, FaClipboardList, FaLeaf, FaTruckPickup, FaTruckMoving } from 'react-icons/fa'; 
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import QRCode from 'react-qr-code';
@@ -33,7 +33,6 @@ export default function Home() {
     const savedValue = localStorage.getItem(binType);
     return savedValue ? parseFloat(savedValue) : 0;
   };
-
   const [foodBin, setFoodBin] = useState(getInitialBinValue('foodBin')); 
   const [plasticBin, setPlasticBin] = useState(getInitialBinValue('plasticBin')); 
   const [paperBin, setPaperBin] = useState(getInitialBinValue('paperBin')); 
@@ -59,6 +58,18 @@ export default function Home() {
     binSetter(newValue);
     localStorage.setItem(binType, newValue);
   };
+
+
+  const shouldShowRequestButton = () => {
+    return (
+      getPercentage(foodBin) > 75 ||
+      getPercentage(plasticBin) > 75 ||
+      getPercentage(paperBin) > 75
+    );
+  };
+
+
+  
 
   const goToForm = () => {
     
@@ -212,7 +223,7 @@ export default function Home() {
           <div className="bg-gradient-to-r from-purple-400 to-purple-600 p-6 mt-8 rounded-lg shadow-lg text-center transition-transform transform hover:scale-105" data-aos="fade-up" data-aos-delay="400">
             <h3 className="text-xl font-semibold mb-2">Overall Bin Percentage</h3>
             <div className="flex justify-center items-center mb-4">
-              <FaLeaf className="text-green-600 text-3xl animate-bounce mr-2" />
+              <FaRecycle className="text-green-600 text-3xl animate-bounce mr-2" />
               <div className="w-32 h-32 mx-auto">
                 <CircularProgressbar
                   value={overallPercentage}
@@ -225,7 +236,7 @@ export default function Home() {
                   })}
                 />
               </div>
-              <FaLeaf className="text-green-600 text-3xl animate-bounce ml-2" />
+              <FaTrash className="text-green-700 text-3xl animate-bounce ml-2" />
             </div>
             <p className="text-lg font-semibold">Keep it Green and Keep recycling and reducing waste to improve this percentage!</p>
 
@@ -235,8 +246,11 @@ export default function Home() {
           </div>
 
             {/* Conditionally show the "Collect Waste" button when the overall percentage exceeds 75% */}
-            {overallPercentage > 75 && (
-              <button className="mt-4 bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-all" onClick={goToForm}>
+            {shouldShowRequestButton() && (
+              <button
+                className="mt-4 bg-red-600 text-white font-bold py-2 px-6 rounded-full hover:bg-red-700 transition-all"
+                onClick={goToForm}
+              >
                 Collect Waste
               </button>
             )}
