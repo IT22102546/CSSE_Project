@@ -1,5 +1,7 @@
 // controllers/binController.js
 import Bin from '../models/bin.model.js';
+import logger from '../utils/logger.js';
+import { errorHandler } from '../utils/error.js';
 
 // Create or Update Bin Request
 export const createOrUpdateBin = async (req, res) => {
@@ -32,6 +34,22 @@ export const createOrUpdateBin = async (req, res) => {
     await bin.save();
     res.status(200).json({ message: 'Bin request saved successfully', bin });
   } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+// Fetch all bin locations
+export const getAllBins = async (req, res) => {
+  try {
+    const bins = await Bin.find();
+    if (!bins.length) {
+      logger.warn("No bins found");
+      return res.status(404).json({ message: "No bins found" });
+    }
+    logger.info("All bins retrieved successfully");
+    res.status(200).json(bins);
+  } catch (error) {
+    logger.error(`Error retrieving bins: ${error.message}`);
     res.status(500).json({ message: 'Server error', error });
   }
 };
