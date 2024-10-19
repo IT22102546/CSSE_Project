@@ -13,6 +13,9 @@ import ResolvedIssues from "./ResolvedIssues";
 import DashComplain from "../Components/DashComplain";
 import CollectorIssueAdmin from "./CollectorIssueAdmin";
 
+import DashRequest from "../Components/DashRequest";
+
+
 
 
 
@@ -46,6 +49,8 @@ export default function DashBoard() {
       {tab === 'resolvedIssue' && <ResolvedIssues/>}
       {tab === 'complain' && <DashComplain/>}
       {tab === 'CollectorIssuesRecieved' && <CollectorIssueAdmin/>}
+      {tab === 'request' && <DashRequest/>}
+
       
    
      
