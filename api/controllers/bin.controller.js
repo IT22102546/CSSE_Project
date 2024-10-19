@@ -85,8 +85,9 @@ export const getAllBins = async (req, res) => {
   };
 
 export const resetBins = async (req, res) => {
-
+    console.log("from backend")
     const { id } = req.params;
+    console.log(id)
   try {
    
     await Bin.updateOne({ _id: id }, { foodBin: 0, plasticBin: 0, paperBin: 0 });
@@ -111,5 +112,24 @@ export const getAllBinss = async (req, res) => {
     res.status(500).json({ message: 'Server error', error });
   }
 };
+
+// Fetch a single bin by ID
+export const getABin = async (req, res) => {
+  const { id } = req.params; // Retrieve the bin ID from the request parameters
+
+  try {
+    const bin = await Bin.findById(id); // Find the bin by ID
+
+    if (!bin) {
+      return res.status(404).json({ message: 'Bin not found' });
+    }
+
+    res.status(200).json(bin); // Return the bin data
+  } catch (error) {
+    logger.error(`Error retrieving bin with ID ${id}: ${error.message}`);
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
   
   
