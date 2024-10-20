@@ -20,6 +20,7 @@ export default function DashRequest() {
           setRequests(sortedRequests);
           setTotalRequests(sortedRequests.length);
           setTotalCompletedRequests(sortedRequests.filter(bin => !bin.isRequested).length);
+
         }
       } catch (error) {
         console.error('Error fetching requests:', error);
@@ -54,10 +55,11 @@ export default function DashRequest() {
         if (resetRes.ok) {
           const updatedRequests = await fetch('/api/bin/getbins');
           const updatedData = await updatedRequests.json();
-          
+
           // Sort the updated requests by createdAt in descending order
           const sortedUpdatedRequests = updatedData.bins.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
           setRequests(sortedUpdatedRequests);
+
   
           // Notify homepage to update bins
           localStorage.setItem('refreshBins', 'true'); 
@@ -71,7 +73,7 @@ export default function DashRequest() {
       console.error('Error completing request:', error);
     }
   };
-  
+
   return (
     <div className="table-auto overflow-x-scroll mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500">
       <div className="w-full max-w-4xl">
@@ -98,6 +100,7 @@ export default function DashRequest() {
         {loading ? (
           <p className="text-center">Loading requests...</p>
         ) : requests.length > 0 ? (
+
           <Table hoverable className="shadow-md w-3/4 mx-auto"> {/* Increased width */}
             <Table.Head>
               <Table.HeadCell>Created At</Table.HeadCell>
@@ -124,7 +127,9 @@ export default function DashRequest() {
                     <div>Paper Bin: {request.binLevels.paperBin}%</div>
                   </Table.Cell>
                   <Table.Cell>{request.overallPercentage}%</Table.Cell>
+
                   <Table.Cell>Rs. {(request.totalPrice ? request.totalPrice.toFixed(2) : '0.00')}</Table.Cell> {/* Display price with 2 decimal places */}
+
                   <Table.Cell>
                     {request.isRequested ? (
                       <button

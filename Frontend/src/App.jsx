@@ -39,9 +39,6 @@ export default function App() {
         <Route path="/about" element={<AboutUs/>} />
         <Route path="/contact" element={<ContactUs/>} />
 
-       
-        
-        
 
 
 
@@ -60,20 +57,21 @@ export default function App() {
           <Route path="/submittIssue" element={<SubmitIssue/>}/>
           <Route path="/update-issue/:id" element={<UpdateCollectorIssue/>}/>
 
+
           <Route path="/request" element={<CollectionRequestForm/>}/>
           <Route path="/assign-route/:id" element={<AssignRoute/>}/> 
           <Route path='/update-assigned-route/:id' element={<UpdateAssignedRouteAdmin/>}/>
+
+          <Route path="/request" element={<CollectionRequestForm/>}/> 
           <Route path="/request-success" element={<RequestSuccess/>}/> 
           
+
 
         <Route/> 
       </Routes>
     </BrowserRouter>
   )
 }
-
-
-
 
 
 

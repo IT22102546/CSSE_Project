@@ -132,6 +132,11 @@ export const getABin = async (req, res) => {
 };
 
   
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> b795b52fb96ddb414979279935ba63153bf7b1ed
 // controllers/binController.js
 export const getUserRequests = async (req, res) => {
   const { userId } = req.params;
@@ -148,3 +153,5 @@ export const getUserRequests = async (req, res) => {
 
 
   
+  
+

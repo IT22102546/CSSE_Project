@@ -49,12 +49,12 @@ const binSchema = new mongoose.Schema({
         type: Number,
        
     },
-
     isRequested: {
         type: Boolean,
         default: false
     }
 }, { timestamps: true });
+
 
 export default mongoose.model('Bin', binSchema);
 
