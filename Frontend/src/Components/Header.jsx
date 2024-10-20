@@ -94,7 +94,22 @@ export default function Header() {
             >
               Blogs
             </NavLink>
-
+            <NavLink
+              to="/Adminhome"
+              className={({ isActive }) =>
+                isActive ? "text-black" : "text-white"
+              }
+            >
+              Analytical Dashboard
+            </NavLink>
+            <NavLink
+              to="/Adminsign-in"
+              className={({ isActive }) =>
+                isActive ? "text-black" : "text-white"
+              }
+            >
+             Admin
+            </NavLink>
           </div>
         </div>
 
