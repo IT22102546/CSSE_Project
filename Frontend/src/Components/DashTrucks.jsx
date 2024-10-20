@@ -63,6 +63,18 @@ export default function DashTrucks() {
 
   return (
     <div className="container mx-auto p-4">
+      <div className='flex flex-wrap gap-3 pt-5 pl-5 pb-4'>
+            <Link to='/addtruck'>
+                <button className='p-2 text-white bg-green-600 hover:bg-green-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>Add Truck</button>
+            </Link>
+            <Link to='/dashboard?tab=trucks'>
+                <button className='p-2 text-white bg-green-600 hover:bg-green-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>Available Trucks</button>
+            </Link>
+            <Link to='/dashboard?tab=bindetails'>
+                <button className='p-2 text-white bg-green-600 hover:bg-green-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>Bin Details</button>
+            </Link>
+
+        </div>
       {/* Tiles Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
         <div className="p-4 rounded-lg bg-gradient-to-r from-blue-800 to-blue-900 text-white">

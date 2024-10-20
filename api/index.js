@@ -8,6 +8,9 @@ import userRoute from "./routes/user.route.js"
 import truckRoute from "./routes/truck.route.js";
 import issueRoure from "./routes/issue.route.js"
 import binRoute from "./routes/bin.route.js"
+
+import assignRoute from "./routes/assignedRoute.route.js"
+
 import stripe from "./routes/stripe.route.js";
 
 
@@ -38,9 +41,10 @@ app.use("/api/user",userRoute);
 app.use("/api/truck", truckRoute);
 app.use("/api/issue", issueRoure);
 app.use('/api/bin', binRoute);
+app.use('/api/assign-route',assignRoute);
 app.use("/api/stripe",stripe);
 
-
+/
 
 app.use((err,req,res,next)=>{
     const statusCode = err.statusCode || 500;
@@ -52,8 +56,3 @@ app.use((err,req,res,next)=>{
     });
 })
 
-import adminRoutes from './routes/admin.routes.js'
-import adminauthroutes from './routes/adminauth.routes.js'
-
-app.use("/api/adminuser",adminRoutes)
-app.use("/api/adminauth",adminauthroutes)
