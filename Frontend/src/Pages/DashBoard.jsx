@@ -18,6 +18,8 @@ import Bindetails from "./Bindetails";
 import DashAdminViewAssignedRoutes from "../Components/DashAdminViewAssignedRoutes";
 import CollectionMap from "./CollectionMap";
 import DashMyRequest from "../Components/DashMyRequest";
+import ReportCollectiondata from "./ReportCollectiondata";
+import CollectionRecordAdmin from "./CollectionRecordAdmin";
 
 
 
@@ -55,6 +57,8 @@ export default function DashBoard() {
       {tab === 'AssignedroutesAdminView' && <DashAdminViewAssignedRoutes/>}
       {tab === 'collectionmap' && <CollectionMap/>}
       {tab === 'myrequest' && <DashMyRequest/>}
+      {tab === 'reportCollectionData' && <ReportCollectiondata/>}
+      {tab === 'collectionRecords' && <CollectionRecordAdmin/>}
 
       
    

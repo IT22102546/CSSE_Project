@@ -37,11 +37,12 @@ export default function Header() {
       <div className="container mx-auto flex flex-wrap items-center justify-between py-4">
         <div className="flex items-center">
           <NavLink to="/" className="ml-0 md:ml-16">
-            <img
+            {/* <img
               src="/path/to/your/logo.png"
               alt="Logo"
               className="h-10 w-auto md:h-14"
-            />
+            /> */}
+            <h1 className="text-white text-2xl">Eco<span className="text-yellow-300 text-lg font-semibold">Waste</span></h1>
           </NavLink>
         </div>
 
@@ -65,7 +66,7 @@ export default function Header() {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                isActive ? "text-black" : "text-white"
+                isActive ? "text-yellow-300" : "text-white"
               }
             >
               Home
@@ -73,7 +74,7 @@ export default function Header() {
             <NavLink
               to="/about"
               className={({ isActive }) =>
-                isActive ? "text-black" : "text-white"
+                isActive ? "text-yellow-300" : "text-white"
               }
             >
               About Us
@@ -81,7 +82,7 @@ export default function Header() {
             <NavLink
               to="/contact"
               className={({ isActive }) =>
-                isActive ? "text-black" : "text-white"
+                isActive ? "text-yellow-300" : "text-white"
               }
             >
               Contact Us
@@ -89,7 +90,7 @@ export default function Header() {
             <NavLink
               to="/blogs"
               className={({ isActive }) =>
-                isActive ? "text-black" : "text-white"
+                isActive ? "text-yellow-300" : "text-white"
               }
             >
               Blogs
