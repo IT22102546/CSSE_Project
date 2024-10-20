@@ -89,31 +89,42 @@ export default function CollectionRequestForm() {
       .catch(err => console.error('Error with reverse geocoding:', err));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     console.log('Longitude:', longitude);
     console.log('Latitude:', latitude);
     console.log('Address:', address);
-
+  
     if (longitude && latitude && address) {
-      // Navigate to Order Summary page, passing all the necessary state
-      navigate('/order-summary', {
-        state: {
-          userId,
-          userName,
-          userEmail,
-          longitude,
-          latitude,
-          address,
-          binLevels,
-          overallPercentage
+      try {
+        // Perform the API request here (assuming you have an API endpoint for submission)
+        const response = await fetch('/api/submit-request', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            userId,
+            userName,
+            userEmail,
+            longitude,
+            latitude,
+            address,
+            binLevels,
+            overallPercentage,
+          }),
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to submit request');
         }
-      });
+
     } else {
       console.error('Location data is incomplete.');
     }
   };
+  
 
   return (
     <div className="bg-gradient-to-b from-green-100 via-blue-100 to-purple-100 p-6 rounded-lg shadow-lg max-w-4xl mx-auto mt-8" data-aos="fade-up">

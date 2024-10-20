@@ -37,17 +37,17 @@ export default function Bindetails() {
       {/* Buttons Section */}
       <div className="flex flex-col md:flex-row gap-3 mb-6">
         <Link to='/addtruck'>
-          <button className='p-2 text-white bg-green-600 hover:bg-green-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>
+          <button className='p-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>
             Add Truck
           </button>
         </Link>
         <Link to='/dashboard?tab=trucks'>
-          <button className='p-2 text-white bg-green-600 hover:bg-green-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>
+          <button className='p-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>
             Available Trucks
           </button>
         </Link>
         <Link to='/dashboard?tab=bindetails'>
-          <button className='p-2 text-white bg-green-600 hover:bg-green-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>
+          <button className='p-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-3xl px-5 text-sm shadow-lg border-solid'>
             Bin Details
           </button>
         </Link>

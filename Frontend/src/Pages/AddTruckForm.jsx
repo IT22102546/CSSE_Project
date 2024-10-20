@@ -117,7 +117,7 @@ export default function AddTruckForm() {
           />
         </div>
 
-        <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white rounded-2xl">
+        <Button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl">
           Add Truck
         </Button>
       </form>

@@ -1,6 +1,6 @@
 import { Sidebar } from "flowbite-react";
 import { useEffect, useState } from "react";
-import { HiArchive, HiArrowSmRight, HiEmojiHappy, HiGift, HiLink, HiOutlineArrowsExpand, HiOutlineCollection, HiOutlineDocument, HiOutlineFolder, HiOutlineQuestionMarkCircle, HiOutlineTerminal, HiOutlineUserGroup, HiQuestionMarkCircle, HiUser} from 'react-icons/hi';
+import { HiArchive, HiArrowSmRight, HiEmojiHappy, HiFolderOpen, HiGift, HiLink, HiOutlineArrowsExpand, HiOutlineCollection, HiOutlineDocument, HiOutlineFolder, HiOutlineQuestionMarkCircle, HiOutlineTerminal, HiOutlineUserGroup, HiQuestionMarkCircle, HiUser} from 'react-icons/hi';
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { signOut } from "../redux/user/userSlice";
@@ -109,6 +109,16 @@ export default function DashSideBar() {
                   as='div'
                 >
                   Complaints
+                </Sidebar.Item>
+              </Link>
+
+              <Link to='/dashboard?tab=collectionRecords' key="collectionRecords">
+                <Sidebar.Item
+                  active={tab === 'collectionRecords'}
+                  icon={HiFolderOpen}
+                  as='div'
+                >
+                  Collection Records
                 </Sidebar.Item>
               </Link>
 

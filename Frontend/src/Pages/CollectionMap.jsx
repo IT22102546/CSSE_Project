@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Button, Alert } from "flowbite-react";
-
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWR3eDIwMDEiLCJhIjoiY20yZTdvMG04MDJodjJrcHZ6YXdwYnFqcyJ9.7xBkMPBN3cuuiFQSeJOnbA';
 
 export default function CollectionMap() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { route } = location.state; // Get the route details passed from DashAssignedRoutes
   const mapContainer = useRef(null);
   const map = useRef(null);
@@ -140,8 +140,6 @@ export default function CollectionMap() {
     }
   };
 
-  
-  //console.log(route.binId);
   const resetBinLevel = async (binId) => {
     try {
       const res = await fetch(`/api/bin/resetBins/${binId}`, {
@@ -162,6 +160,12 @@ export default function CollectionMap() {
     }
   };
 
+  const handleRecordCollectionDetails = () => {
+    navigate("/dashboard?tab=reportCollectionData", {
+      state: { binId: route.binId },
+    });
+  };
+
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-left text-2xl my-7 font-semibold font-sans">Collection Map</h1>
@@ -174,12 +178,18 @@ export default function CollectionMap() {
         style={{ height: "500px", borderRadius: "8px" }}
       />
 
-      <div>
+      <div className="flex flex-wrap">
         <Link to="/dashboard?tab=assignedRoutes">
           <button className="bg-indigo-700 hover:bg-indigo-800 text-white text-sm rounded-3xl p-3 mb-5 mt-5 px-10">
             Return
           </button>
         </Link>
+        <Button
+          onClick={handleRecordCollectionDetails}
+          className="bg-indigo-700 hover:bg-indigo-800 text-white text-sm rounded-3xl p-1 mb-5 mt-5 px-10 ml-3"
+        >
+          Record Collection Details
+        </Button>
       </div>
       <div>
         <h1 className="text-left text-2xl my-7 font-semibold font-sans">Current Bin</h1>
