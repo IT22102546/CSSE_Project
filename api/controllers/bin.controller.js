@@ -132,4 +132,19 @@ export const getABin = async (req, res) => {
 };
 
   
+// controllers/binController.js
+export const getUserRequests = async (req, res) => {
+  const { userId } = req.params;
+  try {
+      const userRequests = await Bin.find({ userId });
+      if (!userRequests) {
+          return res.status(404).json({ message: 'No requests found for this user' });
+      }
+      res.status(200).json(userRequests);
+  } catch (error) {
+      res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+
   

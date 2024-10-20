@@ -20,6 +20,7 @@ import CollectionMap from "./CollectionMap";
 
 
 
+import DashMyRequest from "../Components/DashMyRequest";
 
 
 
@@ -56,6 +57,7 @@ export default function DashBoard() {
       {tab === 'bindetails' && <Bindetails/>}
       {tab === 'AssignedroutesAdminView' && <DashAdminViewAssignedRoutes/>}
       {tab === 'collectionmap' && <CollectionMap/>}
+      {tab === 'myrequest' && <DashMyRequest/>}
 
       
    

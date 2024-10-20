@@ -1,56 +1,60 @@
-// models/Bin.js
 import mongoose from 'mongoose';
 
 const binSchema = new mongoose.Schema({
-  userId: {
-    type: String,
-    required: true,
-    unique: true, // Ensure one user has one bin
-  },
-  userName: {
-    type: String,
-    required: true,
-  },
-  userEmail: {
-    type: String,
-    required: true,
-  },
-  longitude: {
-    type: Number,
-    required: true,
-  },
-  latitude: {
-    type: Number,
-    required: true,
-  },
-  address: {
-    type: String,
-    required: true,
-  },
-  binLevels: {
-    foodBin: {
-      type: Number,
-      default: 0,
+    userId: {
+        type: String,
+        required: true,
+        unique: true // One user can have only one bin
     },
-    plasticBin: {
-      type: Number,
-      default: 0,
+    userName: {
+        type: String,
+        required: true
     },
-    paperBin: {
-      type: Number,
-      default: 0,
+    userEmail: {
+        type: String,
+        required: true
     },
-  },
-  overallPercentage: {
-    type: Number,
-    default: 0,
-  },
+    longitude: {
+        type: Number,
+     
+    },
+    latitude: {
+        type: Number,
+       
+    },
+    address: {
+        type: String,
+       
+    },
+    binLevels: {
+        foodBin: {
+            type: Number,
+            default: 0
+        },
+        plasticBin: {
+            type: Number,
+            default: 0
+        },
+        paperBin: {
+            type: Number,
+            default: 0
+        }
+    },
+    overallPercentage: {
+        type: Number,
+        default: 0
+    },
 
-  isRequested:{
-    type:Boolean,
-    default:false
-  },
+    totalPrice: {
+        type: Number,
+       
+    },
 
-},{ timestamps: true });
+    isRequested: {
+        type: Boolean,
+        default: false
+    }
+}, { timestamps: true });
 
 export default mongoose.model('Bin', binSchema);
+

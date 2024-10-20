@@ -15,6 +15,10 @@ import UpdateCollectorIssue from './Pages/UpdateCollectorIssue';
 import CollectionRequestForm from './Pages/CollectionRequestForm';
 import AssignRoute from './Pages/AssignRoute';
 import UpdateAssignedRouteAdmin from './Pages/UpdateAssignedRouteAdmin';
+import OrderSummary from './Pages/OrderSummary';
+import RequestSuccess from './Pages/RequestSuccess';
+import AboutUs from './Pages/AboutUs';
+import ContactUs from './Pages/ContactUs';
 
 
 export default function App() {
@@ -31,7 +35,13 @@ export default function App() {
         <Route path="/sign-in" element={<SignIn/>}/>
         <Route path="/forgetPassword" element={<ForgetPassword/>}/>
         <Route path="/resetpassword/:id/:token" element={<ResetPassword/>} />
+        <Route path="/order-summary" element={<OrderSummary/>} />
+        <Route path="/about" element={<AboutUs/>} />
+        <Route path="/contact" element={<ContactUs/>} />
 
+       
+        
+        
 
 
 
@@ -53,12 +63,16 @@ export default function App() {
           <Route path="/request" element={<CollectionRequestForm/>}/>
           <Route path="/assign-route/:id" element={<AssignRoute/>}/> 
           <Route path='/update-assigned-route/:id' element={<UpdateAssignedRouteAdmin/>}/>
+          <Route path="/request-success" element={<RequestSuccess/>}/> 
+          
 
         <Route/> 
       </Routes>
     </BrowserRouter>
   )
 }
+
+
 
 
 
