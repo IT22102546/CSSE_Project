@@ -44,7 +44,6 @@ app.use('/api/bin', binRoute);
 app.use('/api/assign-route',assignRoute);
 app.use("/api/stripe",stripe);
 
-/
 
 app.use((err,req,res,next)=>{
     const statusCode = err.statusCode || 500;

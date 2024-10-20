@@ -10,7 +10,6 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWR3eDIwMDEiLCJhIjoiY20yZTdvMG04MDJodjJrcHZ6Y
 
 export default function CollectionRequestForm() {
   const [userId, setUserId] = useState('');
-  const [qrCodeData, setQrCodeData] = useState('');
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [longitude, setLongitude] = useState(null);
@@ -82,9 +81,7 @@ export default function CollectionRequestForm() {
       .then(response => response.json())
       .then(data => {
         if (data.features && data.features.length > 0) {
-
           setAddress(data.features[0].place_name);
-
         } else {
           setAddress('Unknown location');
         }
@@ -113,13 +110,6 @@ export default function CollectionRequestForm() {
           overallPercentage
         }
       });
-
-      const data = await response.json();
-      setQrCodeData(`Bin ID: ${data.bin._id}, User ID: ${userId}, Overall Percentage: ${overallPercentage}%`);  
-      navigate('/request-confirmation');
-    } catch (error) {
-      console.error('Error submitting request:', error);
-
     } else {
       console.error('Location data is incomplete.');
     }
@@ -226,8 +216,6 @@ export default function CollectionRequestForm() {
           </button>
         </div>
       </form>
-
-      
     </div>
   );
 }
