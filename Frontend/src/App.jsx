@@ -23,7 +23,6 @@ import Footer from './Components/Footer';
 
 
 
-
 export default function App() {
   return (
     <BrowserRouter>
@@ -41,7 +40,6 @@ export default function App() {
         <Route path="/order-summary" element={<OrderSummary/>} />
         <Route path="/about" element={<AboutUs/>} />
         <Route path="/contact" element={<ContactUs/>} />
-
 
 
 
